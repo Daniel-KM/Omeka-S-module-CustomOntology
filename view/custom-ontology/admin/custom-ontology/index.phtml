@@ -1,0 +1,61 @@
+<?php
+/** @var \CustomOntology\Form\CustomOntologyForm $form */
+$form->prepare();
+$escapeHtml = $this->plugin('escapeHtml');
+
+$ontologyFieldset = $form->get('ontology_fieldset');
+$resourceClassesFieldset = $form->get('resource_classes_fieldset');
+$propertiesFieldset = $form->get('properties_fieldset');
+
+?>
+
+<?php echo $this->pageTitle($this->translate('Custom ontologies')); ?>
+<?php echo $this->form()->openTag($form); ?>
+<fieldset id='page-actions'>
+    <button type="submit"><?php echo $this->translate('Submit'); ?></button>
+</fieldset>
+
+<h3><?php echo $this->translate('Create a specific ontology'); ?></h3>
+<p class="explanation">
+    <?php echo $this->translate('An ontology must have a namespace uri and a unique lowercase prefix.'); ?>
+    <?php echo $this->translate('It is recommended to use the default namespace uri with the prefix, so it will be possible to publish the ontology automatically.') ?>
+    <?php echo $this->translate('It is recommended to end it with a "/" or a "#", so classes and properties will have their own uri.'); ?>
+    <?php echo sprintf($this->translate('The format can be a %scool uri%s.'), '<a href="https://www.w3.org/Provider/Style/URI" targer="_blank">', '</a>'); ?>
+    <?php echo $this->translate('It can contain a date or a version.'); ?>
+    <?php echo $this->translate('A label is required too, and a description can be added.'); ?>
+</p>
+<p>
+    <?php echo $this->formCollection($ontologyFieldset, false); ?>
+</p>
+
+<h3><?php echo $this->translate('Create specific resource classes'); ?></h3>
+<p class="explanation">
+    <?php echo $this->translate('A class must be formatted with a prefix and a title-case local name, like "dctype:PhysicalObject".'); ?>
+    <?php echo $this->translate('Multiple resource classes can be created, one by row.'); ?>
+</p>
+<p>
+    <?php echo $this->formCollection($resourceClassesFieldset, false); ?>
+</p>
+
+<h3><?php echo $this->translate('Create specific propeties'); ?></h3>
+<p class="explanation">
+    <?php echo $this->translate('A property must be formatted with a prefix and a camel-case local name, like "dcterms:isPartOf".'); ?>
+    <?php echo $this->translate('Multiple properties can be created, one by row.'); ?>
+</p>
+<p>
+    <?php echo $this->formCollection($propertiesFieldset, false); ?>
+</p>
+
+<?php echo $this->form()->closeTag($form); ?>
+
+<p>
+    <?php echo $this->translate('Existing terms will be skipped, so you can copy paste a full list.'); ?>
+    <?php echo $this->translate('The label is the string that follows the term, separated by a ",".'); ?>
+    <?php echo $this->translate('The comment is the string that follows the label, separated by a ",".'); ?>
+    <?php echo $this->translate('It is not recommended to create new resource classes or properties inside standard ontologies: use only your prefixes.'); ?>
+</p>
+<p>
+    <b><?php echo $this->translate('Warning:'); ?></b>
+    <?php echo $this->translate('After checks, there is currently no possibility to correct data (except via sql).'); ?>
+    <?php echo $this->translate('Nevertheless, the vocabularies can be managed like any other vocabularies.'); ?>
+</p>
