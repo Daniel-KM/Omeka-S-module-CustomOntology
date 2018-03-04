@@ -63,7 +63,7 @@ class CustomOntologyController extends AbstractActionController
         $request = $this->getRequest();
 
         $url = $this->viewHelpers()->get('url');
-        $defaultNs = $url('ns/prefix', ['prefix' => 'myprefix'], ['force_canonical' => true]) . '.';
+        $defaultNs = $url('ns/prefix', ['prefix' => 'myprefix'], ['force_canonical' => true]) . '/';
 
         /** @var \CustomOntology\Form\CustomOntologyForm $form */
         $form = $this->getForm(CustomOntologyForm::class);

@@ -1,0 +1,13 @@
+<h3><?php echo $this->translate('List of custom ontologies'); ?></h3>
+<?php if (empty($ontologies)): ?>
+<p><?php echo $this->translate('There is no custom ontology.'); ?></p>
+<?php else: ?>
+<ul>
+<?php foreach ($ontologies as $ontology): ?>
+    <li>
+        <?php echo $this->hyperlink($ontology->label(), $this->url('ns/prefix', ['prefix' => $ontology->prefix()])); ?>
+        <?php echo '(' . $ontology->prefix() . ')'; ?>
+    </li>
+<?php endforeach; ?>
+</ul>
+<?php endif;

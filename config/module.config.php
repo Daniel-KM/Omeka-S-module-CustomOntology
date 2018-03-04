@@ -16,12 +16,41 @@ return [
         ],
     ],
     'controllers' => [
+        'invokables' => [
+            Controller\NsController::class => Controller\NsController::class,
+        ],
         'factories' => [
             Controller\Admin\CustomOntologyController::class => Service\Controller\Admin\CustomOntologyControllerFactory::class,
         ],
     ],
     'router' => [
         'routes' => [
+            'ns' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/ns',
+                    'defaults' => [
+                        'controller' => Controller\NsController::class,
+                        'action' => 'browse',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'prefix' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/:prefix',
+                            'constraints' => [
+                                // Prefix of the namespace uri doesn't allow "-" or "_".
+                                'prefix' => '[a-zA-Z][a-zA-Z0-9]*',
+                            ],
+                            'defaults' => [
+                                'action' => 'show',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'admin' => [
                 'child_routes' => [
                     'custom-ontology' => [

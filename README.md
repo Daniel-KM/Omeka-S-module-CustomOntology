@@ -20,7 +20,7 @@ properties are known only by you and are not described anywhere, it will be hard
 to match them and to make relations with other.
 
 This module avoids to create a specific rdf vocabularies, turtle or n3 files
-too, so anybody can use Omeka S like wished.
+too, so anybody can use Omeka S like wished, with any documents or resources.
 
 Furthermore, it makes old Omeka Classic sites fully upgradable automatically
 into Omeka S via the plugin [Upgrade To Omeka S].
@@ -44,6 +44,9 @@ be available immediately.
 
 The update and deletion are currently not supported, but the ontologies can be
 managed like any other vocabularies.
+
+When the custom ontologies are named as proposed (Omeka url + `/ns/prefix/`),
+they will be available in `https://example.org/ns`.
 
 
 Warning
