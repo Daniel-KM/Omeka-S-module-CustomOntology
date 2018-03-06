@@ -129,7 +129,7 @@ class CustomOntologyController extends AbstractActionController
             $urlHelper = $this->viewHelpers()->get('Url');
             $message = new Message(
                 'The vocabulary "%1$s" (%2$s) has been created (%3$sapi%4$s).', // @translate
-                '<a href="' . $urlHelper('admin/default', ['controller' => 'vocabularies']) . '">' . $vocabulary->label() . '</a>',
+                '<a href="' . $urlHelper('admin/default', ['controller' => 'vocabulary']) . '">' . $vocabulary->label() . '</a>',
                 $vocabulary->prefix(),
                 '<a href="' . $urlHelper('api/default', ['resource' => 'vocabularies', 'id' => $vocabulary->id()]) . '" targer="_blank">', '</a>'
             );
