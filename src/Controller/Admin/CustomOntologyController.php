@@ -351,13 +351,13 @@ class CustomOntologyController extends AbstractActionController
             $term = $prefix . ':' . $localName;
 
             $regex = $type === 'resource_classes'
-                ? '~^([a-z][a-z0-9]*):([A-Z][a-zA-Z0-9]*)$~'
-                : '~^([a-z][a-z0-9]*):([a-z][a-zA-Z0-9]*)$~';
+                ? '~^([a-z][a-z0-9]*):([A-Z][a-zA-Z0-9_-]*)$~'
+                : '~^([a-z][a-z0-9]*):([a-z][a-zA-Z0-9_-]*)$~';
             preg_match($regex, $term, $matches);
             if (empty($matches[0])) {
                 $hasError = true;
                 $this->messenger()->addError(new Message(
-                    '%s: The term "%s" must start with an alphabetic character and contain only alphanumeric characters.', // @translate
+                    '%s: The term "%s" must start with an alphabetic character and contain only alphanumeric characters, "-" and "_".', // @translate
                     $textMessage, $term
                 ));
                 continue;
