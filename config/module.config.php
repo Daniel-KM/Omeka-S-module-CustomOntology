@@ -23,6 +23,11 @@ return [
             Controller\Admin\CustomOntologyController::class => Service\Controller\Admin\CustomOntologyControllerFactory::class,
         ],
     ],
+    'controller_plugins' => [
+        'invokables' => [
+            'createTurtle' => Mvc\Controller\Plugin\CreateTurtle::class,
+        ],
+    ],
     'router' => [
         'routes' => [
             'ns' => [

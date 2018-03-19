@@ -83,21 +83,25 @@ class CustomOntologyController extends AbstractActionController
         }
 
         $params = $form->getData();
+        $action = $this->params()->fromPost('submit', 'submit');
 
         // TODO Move validation inside form.
         $valid = [];
         $valid['ontology'] = $this->validateOntology(
-            $params['ontology_fieldset']
+            $params['ontology_fieldset'],
+            $action !== 'download'
         );
         if ($valid['ontology'] && $valid['ontology']['o:prefix']) {
             $this->ontologyPrefix = $valid['ontology']['o:prefix'];
         }
 
         $valid['resource_classes'] = $this->validateResourceClasses(
-            $params['resource_classes_fieldset']['resource_classes']
+            $params['resource_classes_fieldset']['resource_classes'],
+            $action === 'download'
         );
         $valid['properties'] = $this->validateProperties(
-            $params['properties_fieldset']['properties']
+            $params['properties_fieldset']['properties'],
+            $action === 'download'
         );
 
         if (is_null($valid['ontology'])
@@ -110,6 +114,20 @@ class CustomOntologyController extends AbstractActionController
         if (!array_filter(array_map('array_filter', $valid))) {
             $this->messenger()->addWarning('Nothing to process.'); // @translate
             return $view;
+        }
+
+        if ($action === 'download') {
+            $turtle = $this->createTurtle($valid);
+            if (empty($turtle)) {
+                $this->messenger()->addError(sprintf('Unable to create the ontology.')); // @translate
+                return $view;
+            }
+
+            $filename = (empty($valid['ontology']['o:prefix']) ? 'ontology' : $valid['ontology']['o:prefix']) . '.ttl';
+            // Don’t use the standard media type (text/turtle), so the user will
+            // be able to open it via a standard text editor or directly in the
+            // browser.
+            return $this->outputStringAsFile($turtle, $filename);
         }
 
         $result = $this->saveOntology($valid['ontology']);
@@ -170,9 +188,10 @@ class CustomOntologyController extends AbstractActionController
      * Check if the ontology is valid.
      *
      * @param array $ontology
+     * @param bool $checkIfExists
      * @return array|null Null if error.
      */
-    protected function validateOntology(array $ontology)
+    protected function validateOntology(array $ontology, $checkIfExists = true)
     {
         if (empty($ontology['o:prefix']) && empty($ontology['o:namespace_uri'])) {
             return $ontology;
@@ -198,10 +217,22 @@ class CustomOntologyController extends AbstractActionController
             return;
         }
 
+        if (!strlen($ontology['o:label'])) {
+            $this->messenger()->addError('A label is required for the ontology.'); // @translate
+            return;
+        }
+
+        $ontology['o:class'] = [];
+        $ontology['o:property'] = [];
+
+        if (!$checkIfExists) {
+            return $ontology;
+        }
+
         $api = $this->api();
         $vocabulary = $api->searchOne('vocabularies', ['prefix' => $ontology['o:prefix']])->getContent();
         if (!empty($vocabulary)) {
-            $this->messenger()->addError(new Message(
+            $this->messenger()->addWarning(new Message(
                 'An ontology exists for the prefix "%s".', // @translate
                 $ontology['o:prefix']
             ));
@@ -210,20 +241,13 @@ class CustomOntologyController extends AbstractActionController
 
         $vocabulary = $api->searchOne('vocabularies', ['namespace_uri' => $ontology['o:namespace_uri']])->getContent();
         if (!empty($vocabulary)) {
-            $this->messenger()->addError(new Message(
+            $this->messenger()->addWarning(new Message(
                 'An ontology exists for the namespace uri "%s".', // @translate
                 $ontology['o:namespace_uri']
             ));
             return;
         }
 
-        if (!strlen($ontology['o:label'])) {
-            $this->messenger()->addError('A label is required for the ontology.'); // @translate
-            return;
-        }
-
-        $ontology['o:class'] = [];
-        $ontology['o:property'] = [];
         return $ontology;
     }
 
@@ -231,11 +255,12 @@ class CustomOntologyController extends AbstractActionController
      * Check if the resource classes are valid.
      *
      * @param string $resourceClasses
+     * @param bool $keepExisting
      * @return array|null Null if error.
      */
-    protected function validateResourceClasses($resourceClasses)
+    protected function validateResourceClasses($resourceClasses, $keepExisting = true)
     {
-        $resourceClasses = $this->validateElements($resourceClasses, 'resource_classes');
+        $resourceClasses = $this->validateElements($resourceClasses, 'resource_classes', $keepExisting);
         return $resourceClasses;
     }
 
@@ -243,11 +268,12 @@ class CustomOntologyController extends AbstractActionController
      * Check if the properties are valid.
      *
      * @param string $properties
+     * @param bool $keepExisting
      * @return array|null Null if error.
      */
-    protected function validateProperties($properties)
+    protected function validateProperties($properties, $keepExisting = true)
     {
-        $properties = $this->validateElements($properties, 'properties');
+        $properties = $this->validateElements($properties, 'properties', $keepExisting);
         return $properties;
     }
 
@@ -256,9 +282,11 @@ class CustomOntologyController extends AbstractActionController
      *
      * @param string $elements
      * @param string $type "resouce_classes" or "properties"
+     * @param bool $keepExisting Keep all good elements in the returned array,
+     * even if the elements that exist in Omeka.
      * @return array|null Null if error.
      */
-    protected function validateElements($elements, $type)
+    protected function validateElements($elements, $type, $keepExisting = true)
     {
         $types = [
             'resource_classes' => 'Resource classes', // @translate
@@ -388,16 +416,18 @@ class CustomOntologyController extends AbstractActionController
                     continue;
                 }
 
-                $existingTerm = $api->searchOne($type, [
-                    'vocabulary_id' => $vocabulary->getId(),
-                    'local_name' => $element['o:local_name'],
-                ])->getContent();
-                if ($existingTerm) {
-                    $this->messenger()->addWarning(new Message(
-                        '%s: The term "%s" exists and is skipped.', // @translate
-                        $textMessage, $term
-                    ));
-                    continue;
+                if (!$keepExisting) {
+                    $existingTerm = $api->searchOne($type, [
+                        'vocabulary_id' => $vocabulary->getId(),
+                        'local_name' => $element['o:local_name'],
+                    ])->getContent();
+                    if ($existingTerm) {
+                        $this->messenger()->addWarning(new Message(
+                            '%s: The term "%s" exists and is skipped.', // @translate
+                            $textMessage, $term
+                        ));
+                        continue;
+                    }
                 }
 
                 // TODO Check owner of the vocabulary?
@@ -553,5 +583,35 @@ class CustomOntologyController extends AbstractActionController
         }
 
         return true;
+    }
+
+    /**
+     * Output a string as file.
+     *
+     * @param string $text
+     * @param string $filename
+     * @param string $mediaType
+     * @param string $mode "inline" or "attachment" (default).
+     * @return \Zend\Stdlib\ResponseInterface
+     */
+    protected function outputStringAsFile($text, $filename = 'output.txt', $mediaType = 'text/plain', $mode = 'attachment')
+    {
+        $fileSize = strlen($text);
+
+        // Write HTTP headers
+        $response = $this->getResponse();
+        $headers = $response->getHeaders();
+        $headers->addHeaderLine('Content-type: ' . $mediaType);
+        $headers->addHeaderLine('Content-Disposition: ' . $mode . '; filename="' . $filename . '"');
+        $headers->addHeaderLine('Content-Transfer-Encoding', 'binary');
+        $headers->addHeaderLine('Content-length: ' . $fileSize);
+        $headers->addHeaderLine('Cache-control: private');
+        $headers->addHeaderLine('Content-Description: ' . 'File Transfer');
+
+        // Write file content.
+        $response->setContent($text);
+
+        // Return Response to avoid default view rendering
+        return $response;
     }
 }

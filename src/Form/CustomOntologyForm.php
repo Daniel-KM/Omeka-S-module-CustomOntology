@@ -53,7 +53,7 @@ class CustomOntologyForm extends Form
         ]);
         $ontologyFieldset->add([
             'name' => 'o:comment',
-            'type' => Element\Textarea::class,
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Comment', // @translate
             ],

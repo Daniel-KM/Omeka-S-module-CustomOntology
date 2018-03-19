@@ -12,8 +12,17 @@ $propertiesFieldset = $form->get('properties_fieldset');
 <?php echo $this->pageTitle($this->translate('Custom ontologies')); ?>
 <?php echo $this->form()->openTag($form); ?>
 <fieldset id='page-actions'>
-    <button type="submit"><?php echo $this->translate('Submit'); ?></button>
+    <button type="submit" name="submit" value="download"><?php echo $this->translate('Get turtle'); ?></button>
+    <button type="submit" name="submit" value="submit"><?php echo $this->translate('Submit'); ?></button>
 </fieldset>
+
+<p class="explanation">
+    <?php echo $this->translate('To create an ontology, classes and/or properties, fill the appropriate following fields.'); ?>
+    <?php echo sprintf($this->translate('Then, if wanted,  click "Get turtle" to get the %1$sTurtle%2$s formatted ontology, editable via a standard text editor, so you will be able to update your vocabulary via the page of %3$svocabularies%2$s.'),
+        '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">', '</a>', '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary']) . '">'); ?>
+    <?php echo sprintf($this->translate('Finally, click "Submit" to import it directly in Omeka S (or import the Notation3 file yourself via the page %1$sImport vocabulary%2$s).'),
+        '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary', 'action' => 'import']) . '">', '</a>'); ?>
+</p>
 
 <h3><?php echo $this->translate('Create a specific ontology'); ?></h3>
 <p class="explanation">
