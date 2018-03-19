@@ -108,7 +108,7 @@ Copyright
 [W3C]: https://w3c.org
 [Omeka Classic]: https://omeka.org/classic
 [item types]: https://omeka.org/classic/docs/Content/Item_Types
-[Upgrade To Omeka S]: https://github.com/Daniel-KM/UpgradeToOmekaS
+[Upgrade To Omeka S]: https://github.com/Daniel-KM/Omeka-S-module-UpgradeToOmekaS
 [Installing a module]: https://omeka.org/s/docs/user-manual/modules/#installing-modules
 [module issues]: https://github.com/Daniel-KM/Omeka-S-module-CustomOntology/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
