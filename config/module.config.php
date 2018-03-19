@@ -74,8 +74,9 @@ return [
     'navigation' => [
         'AdminModule' => [
             [
-                'label' => 'Custom ontologies', // @translate
+                'label' => 'Custom ontology', // @translate
                 'route' => 'admin/custom-ontology',
+                'resource' => Controller\Admin\CustomOntologyController::class,
             ],
         ],
     ],
