@@ -58,6 +58,7 @@ class NsController extends AbstractActionController
         $namespaceUri = $ontology->namespaceUri();
         $prefix = $ontology->prefix();
         $ns = $urlHelper('ns/prefix', ['prefix' => $prefix], ['force_canonical' => true]);
+        $ns = rtrim($ns, '/#');
         return strpos($namespaceUri, $ns) === 0;
     }
 }
