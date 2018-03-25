@@ -2,6 +2,7 @@
 namespace CustomOntology;
 
 use Omeka\Module\AbstractModule;
+use Zend\Mvc\MvcEvent;
 
 /**
  * Custom Ontology
@@ -17,5 +18,22 @@ class Module extends AbstractModule
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
+    }
+
+    public function onBootstrap(MvcEvent $event)
+    {
+        parent::onBootstrap($event);
+        $this->addAclRules();
+    }
+
+    /**
+     * Add ACL rules for this module.
+     */
+    protected function addAclRules()
+    {
+        $services = $this->getServiceLocator();
+        $acl = $services->get('Omeka\Acl');
+
+        $acl->allow(null, Controller\NsController::class);
     }
 }
