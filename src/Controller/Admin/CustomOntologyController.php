@@ -124,10 +124,7 @@ class CustomOntologyController extends AbstractActionController
             }
 
             $filename = (empty($valid['ontology']['o:prefix']) ? 'ontology' : $valid['ontology']['o:prefix']) . '.ttl';
-            // Don’t use the standard media type (text/turtle), so the user will
-            // be able to open it via a standard text editor or directly in the
-            // browser.
-            return $this->outputStringAsFile($turtle, $filename);
+            return $this->outputStringAsFile($turtle, $filename, 'text/turtle');
         }
 
         $result = $this->saveOntology($valid['ontology']);
