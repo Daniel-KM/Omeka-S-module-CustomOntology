@@ -124,7 +124,7 @@ class CustomOntologyController extends AbstractActionController
             }
 
             $filename = (empty($valid['ontology']['o:prefix']) ? 'ontology' : $valid['ontology']['o:prefix']) . '.ttl';
-            return $this->outputStringAsFile($turtle, $filename, 'text/turtle');
+            return $this->responseAsFile($turtle, $filename, 'text/turtle');
         }
 
         $result = $this->saveOntology($valid['ontology']);
@@ -580,35 +580,5 @@ class CustomOntologyController extends AbstractActionController
         }
 
         return true;
-    }
-
-    /**
-     * Output a string as file.
-     *
-     * @param string $text
-     * @param string $filename
-     * @param string $mediaType
-     * @param string $mode "inline" or "attachment" (default).
-     * @return \Zend\Stdlib\ResponseInterface
-     */
-    protected function outputStringAsFile($text, $filename = 'output.txt', $mediaType = 'text/plain', $mode = 'attachment')
-    {
-        $fileSize = strlen($text);
-
-        // Write HTTP headers
-        $response = $this->getResponse();
-        $headers = $response->getHeaders();
-        $headers->addHeaderLine('Content-type: ' . $mediaType);
-        $headers->addHeaderLine('Content-Disposition: ' . $mode . '; filename="' . $filename . '"');
-        $headers->addHeaderLine('Content-Transfer-Encoding', 'binary');
-        $headers->addHeaderLine('Content-length: ' . $fileSize);
-        $headers->addHeaderLine('Cache-control: private');
-        $headers->addHeaderLine('Content-Description: ' . 'File Transfer');
-
-        // Write file content.
-        $response->setContent($text);
-
-        // Return Response to avoid default view rendering
-        return $response;
     }
 }

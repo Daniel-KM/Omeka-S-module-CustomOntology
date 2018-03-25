@@ -26,6 +26,7 @@ return [
     'controller_plugins' => [
         'invokables' => [
             'createTurtle' => Mvc\Controller\Plugin\CreateTurtle::class,
+            'responseAsFile' => Mvc\Controller\Plugin\ResponseAsFile::class,
         ],
     ],
     'router' => [
