@@ -41,18 +41,17 @@ Usage
 Simply click on the menu `Custom Ontology` and create your ontology, your
 resources classes and/or your properties following the instructions.
 
-Once the form is filled, you can download the [turtle] file (a common simplified
-[Notation3] format). If needed, this file can be modified with a simple text
-editor and can be imported directly via the core admin page `admin/vocabulary`.
-
-Either, you can import the form directly via the `Submit` button.
+Once the form is filled, just import it directly via the `Submit` button.
 
 You can add new classes and properties into previously imported ontologies,
-but you cannot update existing ones. Nevertheless, you still can use the turtle
-file to upgrade the vocabulary later, like for the other vocabularies.
+but you cannot update existing ones from the form. Nevertheless, you still can
+use the turtle file to upgrade the vocabulary later, like for any other
+vocabularies, at the core admin page `admin/vocabulary`.
 
-When the custom ontologies are named as proposed (Omeka url + `/ns/prefix/`),
-they will be available in `https://example.org/ns/prefix/`.
+When the custom ontologies are named as proposed (Omeka url + `/ns/prefix`),
+they will be publicly listed at `https://example.org/ns` and available as
+turtle, (a common simplified [Notation3] format), at their namespace uri, and as
+a web page at `https://example.org/ns/{prefix}?format=html`.
 
 
 Warning

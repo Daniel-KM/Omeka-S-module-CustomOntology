@@ -18,10 +18,19 @@ $propertiesFieldset = $form->get('properties_fieldset');
 
 <p class="explanation">
     <?php echo $this->translate('To create an ontology, classes and/or properties, fill the appropriate following fields.'); ?>
-    <?php echo sprintf($this->translate('Then, if wanted,  click "Get turtle" to get the %1$sTurtle%2$s formatted ontology, editable via a standard text editor, so you will be able to update your vocabulary via the page of %3$svocabularies%2$s.'),
-        '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">', '</a>', '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary']) . '">'); ?>
+    <?php echo sprintf($this->translate('Then, if wanted,  click "Get turtle" to get the %1$sTurtle%2$s formatted ontology.'),
+        '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">', '</a>'); ?>
     <?php echo sprintf($this->translate('Finally, click "Submit" to import it directly in Omeka S (or import the Notation3 file yourself via the page %1$sImport vocabulary%2$s).'),
         '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary', 'action' => 'import']) . '">', '</a>'); ?>
+    <?php echo sprintf($this->translate('The ontologies that use the proposed namespace uri are available as human and as turtle publicly %1$shere%2$s.'),
+        '<a href="' . $this->url('ns') . '">', '</a>'); ?>
+</p>
+
+<p class="explanation">
+    <b><?php echo $this->translate('Warning:'); ?></b>
+    <?php echo $this->translate('After checks, there is no possibility to correct data here, but only to add new elements.'); ?>
+    <?php echo sprintf($this->translate('Nevertheless, the vocabularies can be managed like any other %1$svocabularies%2$s via the turtle files, that are editable via any standard true text editor.'),
+        '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary']) . '">', '</a>'); ?>
 </p>
 
 <h3><?php echo $this->translate('Create a specific ontology'); ?></h3>
@@ -46,7 +55,7 @@ $propertiesFieldset = $form->get('properties_fieldset');
     <?php echo $this->formCollection($resourceClassesFieldset, false); ?>
 </p>
 
-<h3><?php echo $this->translate('Create specific propeties'); ?></h3>
+<h3><?php echo $this->translate('Create specific properties'); ?></h3>
 <p class="explanation">
     <?php echo $this->translate('A property must be formatted with a prefix and a camel-case local name, like "dcterms:isPartOf".'); ?>
     <?php echo $this->translate('Multiple properties can be created, one by row.'); ?>
@@ -57,14 +66,9 @@ $propertiesFieldset = $form->get('properties_fieldset');
 
 <?php echo $this->form()->closeTag($form); ?>
 
-<p>
-    <?php echo $this->translate('Existing terms will be skipped, so you can copy paste a full list.'); ?>
+<p class="explanation">
+    <?php echo $this->translate('Existing classes or properties will be skipped, so you can copy paste a full list.'); ?>
     <?php echo $this->translate('The label is the string that follows the term, separated by a ",".'); ?>
     <?php echo $this->translate('The comment is the string that follows the label, separated by a ",".'); ?>
-    <?php echo $this->translate('It is not recommended to create new resource classes or properties inside standard ontologies: use only your prefixes.'); ?>
-</p>
-<p>
-    <b><?php echo $this->translate('Warning:'); ?></b>
-    <?php echo $this->translate('After checks, there is currently no possibility to correct data (except via sql).'); ?>
-    <?php echo $this->translate('Nevertheless, the vocabularies can be managed like any other vocabularies.'); ?>
+    <?php echo $this->translate('It is not recommended to create new resource classes or properties inside standard ontologies: use only your own prefixes.'); ?>
 </p>

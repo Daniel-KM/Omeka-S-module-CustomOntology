@@ -17,7 +17,7 @@ $escape = $this->plugin('escapeHtml');
 <h4><?php echo $this->translate('Resource classes'); ?></h4>
 <?php $resourceClasses = $ontology->resourceClasses(); ?>
 <?php if (empty($resourceClasses)): ?>
-<p><?php echo $this->translate('There is no resource classes.'); ?></p>
+<p><?php echo $this->translate('There are no resource classes.'); ?></p>
 <?php else: ?>
 <table class="tablesaw tablesaw-stack" data-tablesaw-mode="stack">
     <thead>
@@ -46,7 +46,7 @@ $escape = $this->plugin('escapeHtml');
 <h4><?php echo $this->translate('Properties'); ?></h4>
 <?php $properties = $ontology->properties(); ?>
 <?php if (empty($properties)): ?>
-<p><?php echo $this->translate('There is no properties.'); ?></p>
+<p><?php echo $this->translate('There are no properties.'); ?></p>
 <?php else: ?>
 <table class="tablesaw tablesaw-stack" data-tablesaw-mode="stack">
     <thead>
