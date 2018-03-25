@@ -5,8 +5,16 @@
 <ul>
 <?php foreach ($ontologies as $ontology): ?>
     <li>
-        <?php echo $this->hyperlink($ontology->label(), $this->url('ns/prefix', ['prefix' => $ontology->prefix()])); ?>
-        <?php echo '(' . $ontology->prefix() . ')'; ?>
+        <dt><?php echo $ontology->label(); ?></dt>
+        <dd><?php
+            echo sprintf('%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]',
+                $ontology->namespaceUri(),
+                '<a href="' . $this->url('ns/prefix', ['prefix' => $ontology->prefix()], ['query' => ['format' => 'html']]) . '">',
+                '<a href="' . $ontology->namespaceUri() . '">',
+                '</a>',
+                $ontology->prefix()
+            );
+        ?></dd>
     </li>
 <?php endforeach; ?>
 </ul>

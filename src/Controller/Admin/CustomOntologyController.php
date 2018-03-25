@@ -158,7 +158,7 @@ class CustomOntologyController extends AbstractActionController
         $this->entityManager->flush();
 
         if ($resultResourceClasses) {
-            $createds = array_map(function($v) {
+            $createds = array_map(function ($v) {
                 return $v['term'];
             }, $valid['resource_classes']);
             $this->messenger()->addSuccess(new Message(
@@ -168,7 +168,7 @@ class CustomOntologyController extends AbstractActionController
         }
 
         if ($resultProperties) {
-            $createds = array_map(function($v) {
+            $createds = array_map(function ($v) {
                 return $v['term'];
             }, $valid['properties']);
             $this->messenger()->addSuccess(new Message(

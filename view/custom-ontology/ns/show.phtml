@@ -6,8 +6,9 @@ $escape = $this->plugin('escapeHtml');
 <h3><?php echo $this->translate($ontology->label()); ?></h3>
 
 <ul>
-    <li><?php echo sprintf('Prefix: %s', $ontology->prefix()); ?></li>
-    <li><?php echo sprintf('Namespace uri: %s', $this->hyperlink($ontology->namespaceUri()), $ontology->namespaceUri()); ?></li>
+    <li><?php echo sprintf($this->translate('Namespace uri: %s'), $ontology->namespaceUri()); ?></li>
+    <li><?php echo sprintf($this->translate('Recommended prefix: %s'), $ontology->prefix()); ?></li>
+    <li><?php echo sprintf($this->translate('As %s'), $this->hyperlink($this->translate('turtle'), $ontology->namespaceUri())); ?></li>
 </ul>
 <?php if ($comment = $ontology->comment()): ?>
 <p><?php echo $this->translate($comment); ?>
