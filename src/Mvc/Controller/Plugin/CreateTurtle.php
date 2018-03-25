@@ -65,20 +65,30 @@ TURTLE;
         $turtle .= PHP_EOL;
 
         if ($hasOntology) {
-            $formats['ontology'] = <<<'TURTLE'
+            if (empty($ontology['ontology']['o:comment'])) {
+                $formats['ontology'] = <<<'TURTLE'
 <%1$s> a owl:Ontology ;
-    dcterms:title "%2$s" ;
-%3$s    dcterms:creator "%4$s" .
+    dcterms:title "%2$s" .
 
 
 TURTLE;
+            } else {
+                $formats['ontology'] = <<<'TURTLE'
+<%1$s> a owl:Ontology ;
+    dcterms:title "%2$s" ;
+    dcterms:description "%3$s" .
 
-            $turtle .= sprintf(
+
+TURTLE;
+            }
+
+            $turtle .= vsprintf(
                 $formats['ontology'],
-                $ontology['ontology']['o:namespace_uri'],
-                $this->escape($ontology['ontology']['o:label']),
-                empty($ontology['ontology']['o:comment']) ? '' : ('    dcterms:description "' . $this->escape($ontology['ontology']['o:comment']) . '" ;' . PHP_EOL),
-                $this->escape($this->getController()->identity()->getName())
+                [
+                    $ontology['ontology']['o:namespace_uri'],
+                    $this->escape($ontology['ontology']['o:label']) . (' '),
+                    empty($ontology['ontology']['o:comment']) ? '' : $ontology['ontology']['o:comment'],
+                ]
             );
         }
 
