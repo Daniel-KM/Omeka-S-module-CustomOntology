@@ -1,4 +1,5 @@
 <?php
+$this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 'CustomOntology'));
 $this->headLink()->prependStylesheet($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.css', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.jquery.js', 'Omeka'));
 $escape = $this->plugin('escapeHtml');
