@@ -18,7 +18,10 @@ $propertiesFieldset = $form->get('properties_fieldset');
 
 <p class="explanation">
     <?php echo $this->translate('To create an ontology, classes and/or properties, fill the appropriate following fields.'); ?>
-    <?php echo sprintf($this->translate('Then, if wanted,  click "Get turtle" to get the %1$sTurtle%2$s formatted ontology.'),
+    <?php echo $this->translate('The next three forms are independant, and can be used together (for a new ontology) or separately (to add new elements to an existing ontology).'); ?>
+</p>
+<p class="explanation">
+    <?php echo sprintf($this->translate('Once filled, click "Get turtle" to get the %1$sTurtle%2$s formatted ontology, if wanted.'),
         '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">', '</a>'); ?>
     <?php echo sprintf($this->translate('Finally, click "Submit" to import it directly in Omeka S (or import the Notation3 file yourself via the page %1$sImport vocabulary%2$s).'),
         '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary', 'action' => 'import']) . '">', '</a>'); ?>
