@@ -1,7 +1,9 @@
 <?php
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+$translate = $this->plugin('translate');
+
 /** @var \CustomOntology\Form\CustomOntologyForm $form */
 $form->prepare();
-$escapeHtml = $this->plugin('escapeHtml');
 
 $ontologyFieldset = $form->get('ontology_fieldset');
 $resourceClassesFieldset = $form->get('resource_classes_fieldset');
@@ -9,59 +11,59 @@ $propertiesFieldset = $form->get('properties_fieldset');
 
 ?>
 
-<?php echo $this->pageTitle($this->translate('Custom ontologies')); ?>
+<?php echo $this->pageTitle($translate('Custom ontologies')); ?>
 <?php echo $this->form()->openTag($form); ?>
 <fieldset id='page-actions'>
-    <button type="submit" name="submit" value="download"><?php echo $this->translate('Get turtle'); ?></button>
-    <button type="submit" name="submit" value="submit"><?php echo $this->translate('Submit'); ?></button>
+    <button type="submit" name="submit" value="download"><?php echo $translate('Get turtle'); ?></button>
+    <button type="submit" name="submit" value="submit"><?php echo $translate('Submit'); ?></button>
 </fieldset>
 
 <p class="explanation">
-    <?php echo $this->translate('To create an ontology, classes and/or properties, fill the appropriate following fields.'); ?>
-    <?php echo $this->translate('The next three forms are independant, and can be used together (for a new ontology) or separately (to add new elements to an existing ontology).'); ?>
+    <?php echo $translate('To create an ontology, classes and/or properties, fill the appropriate following fields.'); ?>
+    <?php echo $translate('The next three forms are independant, and can be used together (for a new ontology) or separately (to add new elements to an existing ontology).'); ?>
 </p>
 <p class="explanation">
-    <?php echo sprintf($this->translate('Once filled, click "Get turtle" to get the %1$sTurtle%2$s formatted ontology, if wanted.'),
+    <?php echo sprintf($translate('Once filled, click "Get turtle" to get the %1$sTurtle%2$s formatted ontology, if wanted.'),
         '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">', '</a>'); ?>
-    <?php echo sprintf($this->translate('Finally, click "Submit" to import it directly in Omeka S (or import the Notation3 file yourself via the page %1$sImport vocabulary%2$s).'),
+    <?php echo sprintf($translate('Finally, click "Submit" to import it directly in Omeka S (or import the Notation3 file yourself via the page %1$sImport vocabulary%2$s).'),
         '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary', 'action' => 'import']) . '">', '</a>'); ?>
-    <?php echo sprintf($this->translate('The ontologies that use the proposed namespace uri are available as human and as turtle publicly %1$shere%2$s.'),
+    <?php echo sprintf($translate('The ontologies that use the proposed namespace uri are available as human and as turtle publicly %1$shere%2$s.'),
         '<a href="' . $this->url('ns') . '">', '</a>'); ?>
 </p>
 
 <p class="explanation">
-    <b><?php echo $this->translate('Warning:'); ?></b>
-    <?php echo $this->translate('After checks, there is no possibility to correct data here, but only to add new elements.'); ?>
-    <?php echo sprintf($this->translate('Nevertheless, the vocabularies can be managed like any other %1$svocabularies%2$s via the turtle files, that are editable via any standard true text editor.'),
+    <b><?php echo $translate('Warning:'); ?></b>
+    <?php echo $translate('After checks, there is no possibility to correct data here, but only to add new elements.'); ?>
+    <?php echo sprintf($translate('Nevertheless, the vocabularies can be managed like any other %1$svocabularies%2$s via the turtle files, that are editable via any standard true text editor.'),
         '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary']) . '">', '</a>'); ?>
 </p>
 
-<h3><?php echo $this->translate('Create a specific ontology'); ?></h3>
+<h3><?php echo $translate('Create a specific ontology'); ?></h3>
 <p class="explanation">
-    <?php echo $this->translate('An ontology must have a namespace uri and a unique lowercase prefix.'); ?>
-    <?php echo $this->translate('It is recommended to use the default namespace uri with the prefix, so it will be possible to publish the ontology automatically.') ?>
-    <?php echo $this->translate('It is recommended to end it with a "/" or a "#", so classes and properties will have their own uri.'); ?>
-    <?php echo sprintf($this->translate('The format can be a %scool uri%s.'), '<a href="https://www.w3.org/Provider/Style/URI" targer="_blank">', '</a>'); ?>
-    <?php echo $this->translate('It can contain a date or a version.'); ?>
-    <?php echo $this->translate('A label is required too, and a description can be added.'); ?>
+    <?php echo $translate('An ontology must have a namespace uri and a unique lowercase prefix.'); ?>
+    <?php echo $translate('It is recommended to use the default namespace uri with the prefix, so it will be possible to publish the ontology automatically.') ?>
+    <?php echo $translate('It is recommended to end it with a "/" or a "#", so classes and properties will have their own uri.'); ?>
+    <?php echo sprintf($translate('The format can be a %scool uri%s.'), '<a href="https://www.w3.org/Provider/Style/URI" targer="_blank">', '</a>'); ?>
+    <?php echo $translate('It can contain a date or a version.'); ?>
+    <?php echo $translate('A label is required too, and a description can be added.'); ?>
 </p>
 <p>
     <?php echo $this->formCollection($ontologyFieldset, false); ?>
 </p>
 
-<h3><?php echo $this->translate('Create specific resource classes'); ?></h3>
+<h3><?php echo $translate('Create specific resource classes'); ?></h3>
 <p class="explanation">
-    <?php echo $this->translate('A class must be formatted with a prefix and a title-case local name, like "dctype:PhysicalObject".'); ?>
-    <?php echo $this->translate('Multiple resource classes can be created, one by row.'); ?>
+    <?php echo $translate('A class must be formatted with a prefix and a title-case local name, like "dctype:PhysicalObject".'); ?>
+    <?php echo $translate('Multiple resource classes can be created, one by row.'); ?>
 </p>
 <p>
     <?php echo $this->formCollection($resourceClassesFieldset, false); ?>
 </p>
 
-<h3><?php echo $this->translate('Create specific properties'); ?></h3>
+<h3><?php echo $translate('Create specific properties'); ?></h3>
 <p class="explanation">
-    <?php echo $this->translate('A property must be formatted with a prefix and a camel-case local name, like "dcterms:isPartOf".'); ?>
-    <?php echo $this->translate('Multiple properties can be created, one by row.'); ?>
+    <?php echo $translate('A property must be formatted with a prefix and a camel-case local name, like "dcterms:isPartOf".'); ?>
+    <?php echo $translate('Multiple properties can be created, one by row.'); ?>
 </p>
 <p>
     <?php echo $this->formCollection($propertiesFieldset, false); ?>
@@ -70,8 +72,8 @@ $propertiesFieldset = $form->get('properties_fieldset');
 <?php echo $this->form()->closeTag($form); ?>
 
 <p class="explanation">
-    <?php echo $this->translate('Existing classes or properties will be skipped, so you can copy paste a full list.'); ?>
-    <?php echo $this->translate('The label is the string that follows the term, separated by a ",".'); ?>
-    <?php echo $this->translate('The comment is the string that follows the label, separated by a ",".'); ?>
-    <?php echo $this->translate('It is not recommended to create new resource classes or properties inside standard ontologies: use only your own prefixes.'); ?>
+    <?php echo $translate('Existing classes or properties will be skipped, so you can copy paste a full list.'); ?>
+    <?php echo $translate('The label is the string that follows the term, separated by a ",".'); ?>
+    <?php echo $translate('The comment is the string that follows the label, separated by a ",".'); ?>
+    <?php echo $translate('It is not recommended to create new resource classes or properties inside standard ontologies: use only your own prefixes.'); ?>
 </p>
