@@ -42,8 +42,9 @@ $propertiesFieldset = $form->get('properties_fieldset');
 <p class="explanation">
     <?php echo $translate('An ontology must have a namespace uri and a unique lowercase prefix.'); ?>
     <?php echo $translate('It is recommended to use the default namespace uri with the prefix, so it will be possible to publish the ontology automatically.') ?>
-    <?php echo $translate('It is recommended to end it with a "/" or a "#", so classes and properties will have their own uri.'); ?>
-    <?php echo sprintf($translate('The format can be a %scool uri%s.'), '<a href="https://www.w3.org/Provider/Style/URI" targer="_blank">', '</a>'); ?>
+    <?php $sampleUrl = $this->url('ns/prefix', ['prefix' => 'myprefix'], ['force_canonical' => true]) . '/'; ?>
+    <?php echo sprintf($translate('It is recommended to end it with a "/" or a "#", so classes and properties will have their own uri, for example %s.'), '<code>' . $sampleUrl . '</code>'); ?>
+    <?php echo sprintf($translate('The format can be a %scool uri%s or a %spersistent url%s.'), '<a href="https://www.w3.org/Provider/Style/URI" target="_blank">', '</a>', '<a href="https://purl.org" target="_blank">', '</a>'); ?>
     <?php echo $translate('It can contain a date or a version.'); ?>
     <?php echo $translate('A label is required too, and a description can be added.'); ?>
 </p>
