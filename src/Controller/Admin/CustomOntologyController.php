@@ -32,7 +32,7 @@ class CustomOntologyController extends AbstractActionController
      * @var array
      */
     protected $defaultVocabularyPrefixes = [
-        'dcterms', 'dctype', 'bibo', 'foaf',
+        'dcterms', 'dctype',
     ];
 
     /**
@@ -375,6 +375,7 @@ class CustomOntologyController extends AbstractActionController
 
             $term = $prefix . ':' . $localName;
 
+            $matches = [];
             $regex = $type === 'resource_classes'
                 ? '~^([a-z][a-z0-9]*):([A-Z][a-zA-Z0-9_-]*)$~'
                 : '~^([a-z][a-z0-9]*):([a-z][a-zA-Z0-9_-]*)$~';
@@ -407,7 +408,7 @@ class CustomOntologyController extends AbstractActionController
                 if (in_array($prefix, $this->defaultVocabularyPrefixes)) {
                     $hasError = true;
                     $this->messenger()->addError(new Message(
-                        '%s: A term cannot be added to the default standard vocabulary "%s".', // @translate
+                        '%s: For standardization purpose, this tool forbids to add a term to the default Dublin Core vocabularies "%s".', // @translate
                         $textMessage, $prefix
                     ));
                     continue;
