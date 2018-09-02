@@ -64,6 +64,8 @@ TURTLE;
 
         $turtle .= PHP_EOL;
 
+        $formats = [];
+
         if ($hasOntology) {
             if (empty($ontology['ontology']['o:comment'])) {
                 $formats['ontology'] = <<<'TURTLE'
