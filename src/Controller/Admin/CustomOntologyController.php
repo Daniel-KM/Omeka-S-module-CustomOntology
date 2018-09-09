@@ -108,6 +108,7 @@ class CustomOntologyController extends AbstractActionController
             || is_null($valid['resource_classes'])
             || is_null($valid['properties'])
         ) {
+            $this->messenger()->addWarning('An error was found. Turtle cannot be created. Nothing was imported.'); // @translate
             return $view;
         }
 

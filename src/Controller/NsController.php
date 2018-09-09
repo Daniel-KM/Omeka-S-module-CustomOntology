@@ -9,7 +9,6 @@ class NsController extends AbstractActionController
 {
     public function browseAction()
     {
-        $urlHelper = $this->viewHelpers()->get('Url');
         $ontologies = [];
 
         $vocabularies = $this->api()->search('vocabularies')->getContent();
