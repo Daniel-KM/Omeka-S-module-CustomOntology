@@ -89,7 +89,7 @@ TURTLE;
                 [
                     $ontology['ontology']['o:namespace_uri'],
                     $this->escape($ontology['ontology']['o:label']),
-                    empty($ontology['ontology']['o:comment']) ? '' : $ontology['ontology']['o:comment']
+                    empty($ontology['ontology']['o:comment']) ? '' : $ontology['ontology']['o:comment'],
                 ]
             );
         }
