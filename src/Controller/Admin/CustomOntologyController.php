@@ -301,9 +301,8 @@ class CustomOntologyController extends AbstractActionController
         $addedLabels = [];
 
         // The str_replace() allows to fix Apple copy/paste.
-        $elements = array_filter(
-            explode(PHP_EOL, str_replace(["\r\n", "\n\r", "\r", "\n"], PHP_EOL, $elements))
-        );
+        $elements = array_filter(array_map('trim', explode("\n", str_replace(["\r\n", "\n\r", "\r"], ["\n", "\n", "\n"], $elements))));
+
         foreach ($elements as $key => $elementString) {
             $row = $key + 1;
             $element = [];
