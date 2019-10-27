@@ -92,18 +92,10 @@ This Agreement may be freely reproduced and published, provided it is not
 altered, and that no provisions are either added or removed herefrom.
 
 
-Contact
--------
-
-Current maintainers:
-
-* Daniel Berthereau (see [Daniel-KM] on GitHub)
-
-
 Copyright
 ---------
 
-* Copyright Daniel Berthereau, 2018
+* Copyright Daniel Berthereau, 2018-2019 (see [Daniel-KM] on GitHub)
 
 
 [Omeka S]: https://omeka.org/s
