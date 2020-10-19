@@ -22,58 +22,58 @@ msgstr ""
 msgid "Error: unknown vocabulary for \"%1$s\" \"%2$s\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:14
+#: view/custom-ontology/admin/custom-ontology/index.phtml:16
 msgid "Custom ontologies"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:17
+#: view/custom-ontology/admin/custom-ontology/index.phtml:19
 msgid "Get turtle"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:22
+#: view/custom-ontology/admin/custom-ontology/index.phtml:24
 msgid ""
 "To create an ontology, classes and/or properties, fill the appropriate "
 "following fields."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:23
+#: view/custom-ontology/admin/custom-ontology/index.phtml:25
 msgid ""
 "The next three forms are independant, and can be used together (for a new "
 "ontology) or separately (to add new elements to an existing ontology)."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:26
+#: view/custom-ontology/admin/custom-ontology/index.phtml:28
 #, php-format
 msgid ""
 "Once filled, click \"Get turtle\" to get the %1$sTurtle%2$s formatted "
 "ontology, if wanted."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:28
+#: view/custom-ontology/admin/custom-ontology/index.phtml:30
 #, php-format
 msgid ""
 "Finally, click \"Submit\" to import it directly in Omeka S (or import the "
 "Notation3 file yourself via the page %1$sImport vocabulary%2$s)."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:30
+#: view/custom-ontology/admin/custom-ontology/index.phtml:32
 #, php-format
 msgid ""
 "The ontologies that use the proposed namespace uri are available as human "
 "and as turtle publicly %1$shere%2$s."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:35
+#: view/custom-ontology/admin/custom-ontology/index.phtml:37
 msgid "Warning:"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:36
+#: view/custom-ontology/admin/custom-ontology/index.phtml:38
 msgid ""
 "After checks, there is no possibility to correct data here, but only to add "
 "new elements."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:37
+#: view/custom-ontology/admin/custom-ontology/index.phtml:39
 #, php-format
 msgid ""
 "Nevertheless, the vocabularies can be managed like any other %1$svocabularies"
@@ -81,129 +81,125 @@ msgid ""
 "editor."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:41
+#: view/custom-ontology/admin/custom-ontology/index.phtml:43
 msgid "Create a specific ontology"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:43
+#: view/custom-ontology/admin/custom-ontology/index.phtml:45
 msgid "An ontology must have a namespace uri and a unique lowercase prefix."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:44
+#: view/custom-ontology/admin/custom-ontology/index.phtml:46
 msgid ""
 "It is recommended to use the default namespace uri with the prefix, so it "
 "will be possible to publish the ontology automatically."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:46
+#: view/custom-ontology/admin/custom-ontology/index.phtml:48
 #, php-format
 msgid ""
 "It is recommended to end it with a \"/\" or a \"#\", so classes and "
 "properties will have their own uri, for example %s."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:47
+#: view/custom-ontology/admin/custom-ontology/index.phtml:49
 #, php-format
 msgid "The format can be a %scool uri%s or a %spersistent url%s."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:48
+#: view/custom-ontology/admin/custom-ontology/index.phtml:50
 msgid "It can contain a date or a version."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:49
+#: view/custom-ontology/admin/custom-ontology/index.phtml:51
 msgid "A label is required too, and a description can be added."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:55
-msgid "Create specific resource classes"
+#: view/custom-ontology/admin/custom-ontology/index.phtml:57
+msgid "Create specific classes"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:57
+#: view/custom-ontology/admin/custom-ontology/index.phtml:59
 msgid ""
 "A class must be formatted with a prefix and a title-case local name, like "
 "\"dctype:PhysicalObject\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:58
-msgid "Multiple resource classes can be created, one by row."
-msgstr ""
-
-#: view/custom-ontology/admin/custom-ontology/index.phtml:64
-msgid "Create specific properties"
+#: view/custom-ontology/admin/custom-ontology/index.phtml:60
+msgid "Multiple classes can be created, one by row."
 msgstr ""
 
 #: view/custom-ontology/admin/custom-ontology/index.phtml:66
+msgid "Create specific properties"
+msgstr ""
+
+#: view/custom-ontology/admin/custom-ontology/index.phtml:68
 msgid ""
 "A property must be formatted with a prefix and a camel-case local name, like "
 "\"dcterms:isPartOf\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:67
+#: view/custom-ontology/admin/custom-ontology/index.phtml:69
 msgid "Multiple properties can be created, one by row."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:76
+#: view/custom-ontology/admin/custom-ontology/index.phtml:78
 msgid ""
 "Existing classes or properties will be skipped, so you can copy paste a full "
 "list."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:77
+#: view/custom-ontology/admin/custom-ontology/index.phtml:79
 msgid "The label is the string that follows the term, separated by a \",\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:78
+#: view/custom-ontology/admin/custom-ontology/index.phtml:80
 msgid "The comment is the string that follows the label, separated by a \",\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:79
+#: view/custom-ontology/admin/custom-ontology/index.phtml:81
 msgid ""
-"It is not recommended to create new resource classes or properties inside "
-"standard ontologies: use only your own prefixes."
+"It is not recommended to create new classes or properties inside standard "
+"ontologies: use only your own prefixes."
 msgstr ""
 
-#: view/custom-ontology/ns/browse.phtml:6
+#: view/custom-ontology/ns/browse.phtml:10
 msgid "List of custom ontologies"
 msgstr ""
 
-#: view/custom-ontology/ns/browse.phtml:8
+#: view/custom-ontology/ns/browse.phtml:12
 msgid "There are no custom ontology."
 msgstr ""
 
-#: view/custom-ontology/ns/browse.phtml:15
+#: view/custom-ontology/ns/browse.phtml:18
 #, php-format
 msgid "%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:12
+#: view/custom-ontology/ns/show.phtml:17
 #, php-format
 msgid "Namespace uri: %s"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:13
+#: view/custom-ontology/ns/show.phtml:18
 #, php-format
 msgid "Recommended prefix: %s"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:14
+#: view/custom-ontology/ns/show.phtml:19
 #, php-format
 msgid "As %s"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:14
+#: view/custom-ontology/ns/show.phtml:19
 msgid "turtle"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:20
-msgid "Resource classes"
+#: view/custom-ontology/ns/show.phtml:28
+msgid "There are no classes."
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:23
-msgid "There are no resource classes."
-msgstr ""
-
-#: view/custom-ontology/ns/show.phtml:52
+#: view/custom-ontology/ns/show.phtml:57
 msgid "There are no properties."
 msgstr ""
 
@@ -296,6 +292,11 @@ msgstr ""
 #: src/Controller/Admin/CustomOntologyController.php:243
 #, php-format
 msgid "An ontology exists for the namespace uri \"%s\"."
+msgstr ""
+
+#: src/Controller/Admin/CustomOntologyController.php:290
+#: src/Controller/Admin/CustomOntologyController.php:555
+msgid "Resource classes"
 msgstr ""
 
 #: src/Controller/Admin/CustomOntologyController.php:317
