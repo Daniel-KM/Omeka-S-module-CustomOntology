@@ -25,9 +25,6 @@ to match them and to make relations with other.
 This module avoids to create a specific rdf vocabularies, turtle or n3 files
 too, so anybody can use Omeka S like wished, with any documents or resources.
 
-Furthermore, it makes old Omeka Classic sites fully upgradable automatically
-into Omeka S via the plugin [Upgrade To Omeka S].
-
 
 Installation
 ------------
@@ -98,7 +95,7 @@ altered, and that no provisions are either added or removed herefrom.
 Copyright
 ---------
 
-* Copyright Daniel Berthereau, 2018-2019 (see [Daniel-KM] on GitLab)
+* Copyright Daniel Berthereau, 2018-2020 (see [Daniel-KM] on GitLab)
 
 
 [Omeka S]: https://omeka.org/s
@@ -108,7 +105,6 @@ Copyright
 [W3C]: https://w3c.org
 [Omeka Classic]: https://omeka.org/classic
 [item types]: https://omeka.org/classic/docs/Content/Item_Types
-[Upgrade To Omeka S]: https://gitlab.com/Daniel-KM/Omeka-S-module-UpgradeToOmekaS
 [Installing a module]: https://omeka.org/s/docs/user-manual/modules/#installing-modules
 [turtle]: https://wikipedia.org/wiki/Turtle_(syntax)
 [Notation3]: https://wikipedia.org/wiki/Notation3
