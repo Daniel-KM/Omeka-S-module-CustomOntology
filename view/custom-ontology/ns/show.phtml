@@ -1,33 +1,38 @@
 <?php
-/** @var \Laminas\View\Renderer\PhpRenderer $this */
+/**
+ * @var \Laminas\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\VocabularyRepresentation $ontology
+ */
+
 $translate = $this->plugin('translate');
 $escape = $this->plugin('escapeHtml');
 $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 'CustomOntology'));
 $this->headLink()->prependStylesheet($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.css', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.jquery.js', 'Omeka'), 'text/javascript', ['defer' => 'defer']);
 ?>
-<h3><?php echo $translate($ontology->label()); ?></h3>
+
+<h3><?= $translate($ontology->label()) ?></h3>
 
 <ul>
-    <li><?php echo sprintf($translate('Namespace uri: %s'), $ontology->namespaceUri()); ?></li>
-    <li><?php echo sprintf($translate('Recommended prefix: %s'), $ontology->prefix()); ?></li>
-    <li><?php echo sprintf($translate('As %s'), $this->hyperlink($translate('turtle'), $ontology->namespaceUri())); ?></li>
+    <li><?= sprintf($translate('Namespace uri: %s'), $ontology->namespaceUri()) ?></li>
+    <li><?= sprintf($translate('Recommended prefix: %s'), $ontology->prefix()) ?></li>
+    <li><?= sprintf($translate('As %s'), $this->hyperlink($translate('turtle'), $ontology->namespaceUri())) ?></li>
 </ul>
 <?php if ($comment = $ontology->comment()): ?>
-<p><?php echo $translate($comment); ?>
+<p><?= $translate($comment) ?>
 <?php endif; ?>
 
-<h4><?php echo $translate('Resource classes'); ?></h4>
+<h4><?= $translate('Classes') ?></h4>
 <?php $resourceClasses = $ontology->resourceClasses(); ?>
 <?php if (empty($resourceClasses)): ?>
-<p><?php echo $translate('There are no resource classes.'); ?></p>
+<p><?= $translate('There are no classes.') ?></p>
 <?php else: ?>
 <table class="tablesaw tablesaw-stack" data-tablesaw-mode="stack">
     <thead>
         <tr>
-            <th><?php echo $translate('Label'); ?></th>
-            <th><?php echo $translate('Term'); ?></th>
-            <th><?php echo $translate('Comment'); ?></th>
+            <th><?= $translate('Label') ?></th>
+            <th><?= $translate('Term') ?></th>
+            <th><?= $translate('Comment');?></th>
         </tr>
     </thead>
     <tbody>
@@ -35,28 +40,28 @@ $this->headScript()->prependFile($this->assetUrl('vendor/tablesaw/tablesaw.stack
         <tr>
             <td>
                 <span class="resource-class-label">
-                    <?php echo $escape($translate($resourceClass->label())); ?>
+                    <?= $escape($translate($resourceClass->label())) ?>
                 </span>
             </td>
-            <td><?php echo $escape($translate($resourceClass->term())); ?></td>
-            <td><?php echo $escape($translate($resourceClass->comment())); ?></td>
+            <td><?= $escape($translate($resourceClass->term())) ?></td>
+            <td><?= $escape($translate($resourceClass->comment())) ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <?php endif; ?>
 
-<h4><?php echo $translate('Properties'); ?></h4>
+<h4><?= $translate('Properties') ?></h4>
 <?php $properties = $ontology->properties(); ?>
 <?php if (empty($properties)): ?>
-<p><?php echo $translate('There are no properties.'); ?></p>
+<p><?= $translate('There are no properties.') ?></p>
 <?php else: ?>
 <table class="tablesaw tablesaw-stack" data-tablesaw-mode="stack">
     <thead>
         <tr>
-            <th><?php echo $translate('Label'); ?></th>
-            <th><?php echo $translate('Term'); ?></th>
-            <th><?php echo $translate('Comment'); ?></th>
+            <th><?= $translate('Label') ?></th>
+            <th><?= $translate('Term') ?></th>
+            <th><?= $translate('Comment') ?></th>
         </tr>
     </thead>
     <tbody>
@@ -64,11 +69,11 @@ $this->headScript()->prependFile($this->assetUrl('vendor/tablesaw/tablesaw.stack
         <tr>
             <td>
                 <span class="resource-class-label">
-                    <?php echo $escape($translate($property->label())); ?>
+                    <?= $escape($translate($property->label())) ?>
                 </span>
             </td>
-            <td><?php echo $escape($translate($property->term())); ?></td>
-            <td><?php echo $escape($translate($property->comment())); ?></td>
+            <td><?= $escape($translate($property->term())) ?></td>
+            <td><?= $escape($translate($property->comment())) ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>

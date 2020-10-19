@@ -1,24 +1,27 @@
 <?php
-/** @var \Laminas\View\Renderer\PhpRenderer $this */
+/**
+ * @var \Laminas\View\Renderer\PhpRenderer $this
+ */
+
 $translate = $this->plugin('translate');
 $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 'CustomOntology'));
 ?>
-<h3><?php echo $translate('List of custom ontologies'); ?></h3>
+
+<h3><?= $translate('List of custom ontologies') ?></h3>
 <?php if (empty($ontologies)): ?>
-<p><?php echo $translate('There are no custom ontology.'); ?></p>
+<p><?= $translate('There are no custom ontology.') ?></p>
 <?php else: ?>
 <ul>
 <?php foreach ($ontologies as $ontology): ?>
     <li>
-        <dt><?php echo $ontology->label(); ?></dt>
-        <dd><?php
-            echo sprintf($translate('%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]'),
+        <dt><?= $ontology->label() ?></dt>
+        <dd><?= sprintf($translate('%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]'),
                 $ontology->namespaceUri(),
                 '<a href="' . $this->url('ns/prefix', ['prefix' => $ontology->prefix()], ['query' => ['format' => 'html']]) . '">',
                 '<a href="' . $ontology->namespaceUri() . '">',
                 '</a>',
                 $ontology->prefix()
-            );
+            )
         ?></dd>
     </li>
 <?php endforeach; ?>
