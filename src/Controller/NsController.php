@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 namespace CustomOntology\Controller;
 
-use Omeka\Api\Representation\VocabularyRepresentation;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Omeka\Api\Representation\VocabularyRepresentation;
 
 class NsController extends AbstractActionController
 {

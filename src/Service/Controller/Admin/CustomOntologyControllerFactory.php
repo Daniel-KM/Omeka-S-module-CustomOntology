@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace CustomOntology\Service\Controller\Admin;
 
 use CustomOntology\Controller\Admin\CustomOntologyController;

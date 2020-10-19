@@ -1,14 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 namespace CustomOntology\Controller\Admin;
 
 use CustomOntology\Form\CustomOntologyForm;
 use Doctrine\ORM\EntityManager;
-use Omeka\Entity\ResourceClass;
-use Omeka\Entity\Property;
-use Omeka\Entity\Vocabulary;
-use Omeka\Stdlib\Message;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Omeka\Entity\Property;
+use Omeka\Entity\ResourceClass;
+use Omeka\Entity\Vocabulary;
+use Omeka\Stdlib\Message;
 
 class CustomOntologyController extends AbstractActionController
 {

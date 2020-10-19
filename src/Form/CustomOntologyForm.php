@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace CustomOntology\Form;
 
 use Laminas\Form\Element;
@@ -7,7 +7,7 @@ use Laminas\Form\Form;
 
 class CustomOntologyForm extends Form
 {
-    public function init()
+    public function init(): void
     {
         // The action attribute is set via the controller.
         $defaultNs = $this->getOption('default_ns') ?: '';

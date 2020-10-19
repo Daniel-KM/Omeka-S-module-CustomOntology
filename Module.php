@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 namespace CustomOntology;
 
-use Omeka\Module\AbstractModule;
 use Laminas\Mvc\MvcEvent;
+use Omeka\Module\AbstractModule;
 
 /**
  * Custom Ontology
@@ -20,7 +20,7 @@ class Module extends AbstractModule
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function onBootstrap(MvcEvent $event)
+    public function onBootstrap(MvcEvent $event): void
     {
         parent::onBootstrap($event);
         $this->addAclRules();
@@ -29,7 +29,7 @@ class Module extends AbstractModule
     /**
      * Add ACL rules for this module.
      */
-    protected function addAclRules()
+    protected function addAclRules(): void
     {
         $services = $this->getServiceLocator();
         $acl = $services->get('Omeka\Acl');
