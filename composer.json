@@ -9,9 +9,9 @@
             "email": "Daniel.packagist@Berthereau.net"
         }
     ],
-    "homepage": "https://github.com/Daniel-KM/Omeka-S-module-CustomOntology",
+    "homepage": "https://gitlab.com/Daniel-KM/Omeka-S-module-CustomOntology",
     "support": {
-        "issues": "https://github.com/Daniel-KM/Omeka-S-module-CustomOntology/issues",
+        "issues": "https://gitlab.com/Daniel-KM/Omeka-S-module-CustomOntology/-/issues",
         "forum": "https://forum.omeka.org/"
     },
     "keywords": [

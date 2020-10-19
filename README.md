@@ -69,13 +69,13 @@ your archives regularly so you can roll back if needed.
 Troubleshooting
 ---------------
 
-See online issues on the [module issues] page on GitHub.
+See online issues on the [module issues] page on GitLab.
 
 
 License
 -------
 
-This module is published under the [CeCILL v2.1] licence, compatible with
+This module is published under the [CeCILL v2.1] license, compatible with
 [GNU/GPL] and approved by [FSF] and [OSI].
 
 In consideration of access to the source code and the rights to copy, modify and
@@ -98,24 +98,24 @@ altered, and that no provisions are either added or removed herefrom.
 Copyright
 ---------
 
-* Copyright Daniel Berthereau, 2018-2019 (see [Daniel-KM] on GitHub)
+* Copyright Daniel Berthereau, 2018-2019 (see [Daniel-KM] on GitLab)
 
 
 [Omeka S]: https://omeka.org/s
-[Custom Ontology]: https://github.com/Daniel-KM/Omeka-S-module-CustomOntology
+[Custom Ontology]: https://gitlab.com/Daniel-KM/Omeka-S-module-CustomOntology
 [LOV]: https://lov.okfn.org
 [schema.org]: https://schema.org
 [W3C]: https://w3c.org
 [Omeka Classic]: https://omeka.org/classic
 [item types]: https://omeka.org/classic/docs/Content/Item_Types
-[Upgrade To Omeka S]: https://github.com/Daniel-KM/Omeka-S-module-UpgradeToOmekaS
+[Upgrade To Omeka S]: https://gitlab.com/Daniel-KM/Omeka-S-module-UpgradeToOmekaS
 [Installing a module]: https://omeka.org/s/docs/user-manual/modules/#installing-modules
 [turtle]: https://wikipedia.org/wiki/Turtle_(syntax)
 [Notation3]: https://wikipedia.org/wiki/Notation3
-[module issues]: https://github.com/Daniel-KM/Omeka-S-module-CustomOntology/issues
+[module issues]: https://gitlab.com/Daniel-KM/Omeka-S-module-CustomOntology/-/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 [FSF]: https://www.fsf.org
 [OSI]: http://opensource.org
 [GitLab]: https://gitlab.com/Daniel-KM
-[Daniel-KM]: https://github.com/Daniel-KM "Daniel Berthereau"
+[Daniel-KM]: https://gitlab.com/Daniel-KM "Daniel Berthereau"
