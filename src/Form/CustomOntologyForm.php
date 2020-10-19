@@ -66,7 +66,7 @@ class CustomOntologyForm extends Form
             'name' => 'resource_classes_fieldset',
             'type' => Fieldset::class,
             'options' => [
-                'label' => 'Resource classes', // @translate
+                'label' => 'Classes', // @translate
             ],
         ]);
         $resourceClassesFieldset = $this->get('resource_classes_fieldset');
