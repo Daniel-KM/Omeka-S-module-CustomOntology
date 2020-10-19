@@ -4,7 +4,7 @@ $translate = $this->plugin('translate');
 $escape = $this->plugin('escapeHtml');
 $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 'CustomOntology'));
 $this->headLink()->prependStylesheet($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.css', 'Omeka'));
-$this->headScript()->prependFile($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.jquery.js', 'Omeka'));
+$this->headScript()->prependFile($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.jquery.js', 'Omeka'), 'text/javascript', ['defer' => 'defer']);
 ?>
 <h3><?php echo $translate($ontology->label()); ?></h3>
 
