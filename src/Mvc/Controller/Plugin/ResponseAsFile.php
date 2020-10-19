@@ -1,7 +1,7 @@
 <?php
 namespace CustomOntology\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
  * Prepare a response for a file.
@@ -17,7 +17,7 @@ class ResponseAsFile extends AbstractPlugin
      * @param string $mode "inline" or "attachment" (default).
      * @param string $cacheControl "public", "private", "no-cache", "no-store"…
      * @param array $specificHeaders Full specific headers.
-     * @return \Zend\Stdlib\ResponseInterface
+     * @return \Laminas\Stdlib\ResponseInterface
      */
     public function __invoke(
         $text,
@@ -29,7 +29,7 @@ class ResponseAsFile extends AbstractPlugin
     ) {
         $fileSize = strlen($text);
 
-        /** @var \Zend\Http\Response $response */
+        /** @var \Laminas\Http\Response $response */
         $controller = $this->getController();
         $response = $controller->getResponse();
 

@@ -1,7 +1,7 @@
 <?php
 namespace CustomOntology\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 use Omeka\Stdlib\Message;
 
 class CreateTurtle extends AbstractPlugin

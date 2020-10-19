@@ -3,7 +3,7 @@ namespace CustomOntology\Service\Controller\Admin;
 
 use CustomOntology\Controller\Admin\CustomOntologyController;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class CustomOntologyControllerFactory implements FactoryInterface
 {
