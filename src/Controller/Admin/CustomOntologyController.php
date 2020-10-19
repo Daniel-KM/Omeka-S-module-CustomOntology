@@ -215,7 +215,7 @@ class CustomOntologyController extends AbstractActionController
             return;
         }
 
-        if (!strlen($ontology['o:label'])) {
+        if (!mb_strlen($ontology['o:label'])) {
             $this->messenger()->addError('A label is required for the ontology.'); // @translate
             return;
         }

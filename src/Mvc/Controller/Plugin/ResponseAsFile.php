@@ -27,7 +27,7 @@ class ResponseAsFile extends AbstractPlugin
         $cacheControl = 'public',
         array $specificHeaders = []
     ) {
-        $fileSize = strlen($text);
+        $fileSize = mb_strlen($text);
 
         /** @var \Zend\Http\Response $response */
         $controller = $this->getController();
