@@ -7,8 +7,8 @@ use Omeka\Entity\ResourceClass;
 use Omeka\Entity\Property;
 use Omeka\Entity\Vocabulary;
 use Omeka\Stdlib\Message;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 class CustomOntologyController extends AbstractActionController
 {
