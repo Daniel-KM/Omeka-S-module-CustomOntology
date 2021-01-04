@@ -205,6 +205,8 @@ class CustomOntologyController extends AbstractActionController
             return;
         }
 
+        $ontology['o:prefix'] = (string) $ontology['o:prefix'];
+        $ontology['o:label'] = (string) $ontology['o:label'];
         if (strtolower($ontology['o:prefix']) !== $ontology['o:prefix']) {
             $this->messenger()->addError('The prefix of the ontology must be lowercase.'); // @translate
             return;
@@ -306,7 +308,7 @@ class CustomOntologyController extends AbstractActionController
         foreach ($elements as $key => $elementString) {
             $row = $key + 1;
             $element = [];
-            $element['term'] = strtok($elementString, ',') ?: '';
+            $element['term'] = strtok((string) $elementString, ',') ?: '';
             $element['o:label'] = strtok(',') ?: '';
             $element['o:comment'] = strtok('') ?: '';
             $element = array_map('trim', $element);
