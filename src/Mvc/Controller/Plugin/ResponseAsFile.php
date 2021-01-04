@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace CustomOntology\Mvc\Controller\Plugin;
 
 use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
@@ -27,7 +28,8 @@ class ResponseAsFile extends AbstractPlugin
         $cacheControl = 'public',
         array $specificHeaders = []
     ) {
-        $fileSize = mb_strlen($text);
+        // Don't use mb_strlen, the size is by byte.
+        $fileSize = strlen($text);
 
         /** @var \Laminas\Http\Response $response */
         $controller = $this->getController();
@@ -35,12 +37,13 @@ class ResponseAsFile extends AbstractPlugin
 
         // Write HTTP headers
         $headers = $response->getHeaders();
-        $headers->addHeaderLine('Content-type: ' . $mediaType);
-        $headers->addHeaderLine('Content-Disposition: ' . $mode . '; filename="' . $filename . '"');
-        $headers->addHeaderLine('Content-Transfer-Encoding', 'binary');
-        $headers->addHeaderLine('Content-length: ' . $fileSize);
-        $headers->addHeaderLine('Cache-control: ' . $cacheControl);
-        $headers->addHeaderLine('Content-Description: ' . 'File Transfer');
+        $headers
+            ->addHeaderLine('Content-type: ' . $mediaType)
+            ->addHeaderLine('Content-Disposition: ' . $mode . '; filename="' . $filename . '"')
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-length: ' . $fileSize)
+            ->addHeaderLine('Cache-control: ' . $cacheControl)
+            ->addHeaderLine('Content-Description: ' . 'File Transfer');
 
         foreach ($specificHeaders as $header) {
             $headers->addHeaderLine($header);
