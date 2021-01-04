@@ -63,7 +63,7 @@ msgid ""
 "Notation3 file yourself via the page %1$sImport vocabulary%2$s)."
 msgstr ""
 "Enfin, cliquer sur \"Soumettre\" pour l’importer directement dans Omeka S. "
-"Vous pouvez aussi importer le fichier Notation3 directemtn via la page des "
+"Vous pouvez aussi importer le fichier Notation3 directement via la page des "
 "%1$svocabulaires%2$s."
 
 #: view/custom-ontology/admin/custom-ontology/index.phtml:32
@@ -205,7 +205,7 @@ msgstr "Il n’y a pas d’ontologie personnalisée."
 #: view/custom-ontology/ns/browse.phtml:18
 #, php-format
 msgid "%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]"
-msgstr "%1$s (%2$slisible%4$s | %3$sturtle%4$s) [préfixerecommandé : %5$s]"
+msgstr "%1$s (%2$slisible%4$s | %3$sturtle%4$s) [préfixe recommandé : %5$s]"
 
 #: view/custom-ontology/ns/show.phtml:17
 #, php-format
