@@ -2,7 +2,8 @@ Custom Ontology (module for Omeka S)
 ====================================
 
 > __New versions of this module and support for Omeka S version 3.0 and above
-> are available on [GitLab], which seems to respect users and privacy better.__
+> are available on [GitLab], which seems to respect users and privacy better
+> than the previous repository.__
 
 [Custom Ontology] is a module for [Omeka S] that allows to create specific
 classes and properties to describe resources when no standard ontologies are
@@ -95,7 +96,7 @@ altered, and that no provisions are either added or removed herefrom.
 Copyright
 ---------
 
-* Copyright Daniel Berthereau, 2018-2020 (see [Daniel-KM] on GitLab)
+* Copyright Daniel Berthereau, 2018-2021 (see [Daniel-KM] on GitLab)
 
 
 [Omeka S]: https://omeka.org/s
