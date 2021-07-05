@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-19 00:00+0000\n"
+"POT-Creation-Date: 2021-07-05 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,116 +270,116 @@ msgstr ""
 msgid "A prefix is set for the ontology, but there is no namespace uri."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:209
+#: src/Controller/Admin/CustomOntologyController.php:211
 msgid "The prefix of the ontology must be lowercase."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:214
+#: src/Controller/Admin/CustomOntologyController.php:216
 msgid ""
 "The prefix must start with an alphabetic character and must contain only "
 "alphanumeric characters."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:219
+#: src/Controller/Admin/CustomOntologyController.php:221
 msgid "A label is required for the ontology."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:234
+#: src/Controller/Admin/CustomOntologyController.php:236
 #, php-format
 msgid "An ontology exists for the prefix \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:243
+#: src/Controller/Admin/CustomOntologyController.php:245
 #, php-format
 msgid "An ontology exists for the namespace uri \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:290
-#: src/Controller/Admin/CustomOntologyController.php:555
+#: src/Controller/Admin/CustomOntologyController.php:292
+#: src/Controller/Admin/CustomOntologyController.php:557
 msgid "Resource classes"
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:317
+#: src/Controller/Admin/CustomOntologyController.php:319
 #, php-format
 msgid "%s, row #%d"
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:324
+#: src/Controller/Admin/CustomOntologyController.php:326
 #, php-format
 msgid "%s: A content is defined, but no term."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:334
-#: src/Controller/Admin/CustomOntologyController.php:346
+#: src/Controller/Admin/CustomOntologyController.php:336
+#: src/Controller/Admin/CustomOntologyController.php:348
 #, php-format
 msgid "%s: The term must be formatted \"prefix:LocalName\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:335
-#: src/Controller/Admin/CustomOntologyController.php:347
+#: src/Controller/Admin/CustomOntologyController.php:337
+#: src/Controller/Admin/CustomOntologyController.php:349
 #, php-format
 msgid "%s: The term must be formatted \"prefix:localName\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:361
+#: src/Controller/Admin/CustomOntologyController.php:363
 #, php-format
 msgid ""
 "%s: The local name part of the term \"%s\" must start with a upper-case "
 "letter."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:371
+#: src/Controller/Admin/CustomOntologyController.php:373
 #, php-format
 msgid ""
 "%s: The local name part of the term \"%s\" must start with a lower-case "
 "letter."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:389
+#: src/Controller/Admin/CustomOntologyController.php:391
 #, php-format
 msgid ""
 "%s: The term \"%s\" must start with an alphabetic character and contain only "
 "alphanumeric characters, \"-\" and \"_\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:404
+#: src/Controller/Admin/CustomOntologyController.php:406
 #, php-format
 msgid "%s: No ontology exists for prefix \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:414
+#: src/Controller/Admin/CustomOntologyController.php:416
 #, php-format
 msgid ""
 "%s: For standardization purpose, this tool forbids to add a term to the "
 "default Dublin Core vocabularies \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:427
+#: src/Controller/Admin/CustomOntologyController.php:429
 #, php-format
 msgid "%s: The term \"%s\" exists and is skipped."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:444
+#: src/Controller/Admin/CustomOntologyController.php:446
 #, php-format
 msgid "%s: The prefix \"%s\" is reserved by Omeka."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:457
+#: src/Controller/Admin/CustomOntologyController.php:459
 #, php-format
 msgid "%s: The term \"%s\" must have a label."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:466
+#: src/Controller/Admin/CustomOntologyController.php:468
 #, php-format
 msgid "%s: The term \"%s\" is already specified above, row #%d."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:475
+#: src/Controller/Admin/CustomOntologyController.php:477
 #, php-format
 msgid "%s: The label \"%s\" is already used above, row #%d."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:508
+#: src/Controller/Admin/CustomOntologyController.php:510
 msgid "An issue occurred when saving the ontology."
 msgstr ""
 

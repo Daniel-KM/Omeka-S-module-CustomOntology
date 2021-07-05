@@ -267,8 +267,8 @@ msgid ""
 "myprefix:mySpecificProperty, My specific property, A property to use for my "
 "specific documents."
 msgstr ""
-"monprefixe:maProprieteSpecifique, Ma propriété spécifique pour utiliser avec "
-"mes documents spécifiques."
+"monprefixe:maProprieteSpecifique, Ma propriété spécifique, Une propriété "
+"à utiliser pour mes documents spécifiques."
 
 #: src/Controller/Admin/CustomOntologyController.php:111
 msgid "An error was found. Turtle cannot be created. Nothing was imported."
