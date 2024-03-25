@@ -38,11 +38,11 @@ class ResponseAsFile extends AbstractPlugin
         // Write HTTP headers
         $headers = $response->getHeaders();
         $headers
-            ->addHeaderLine('Content-type: ' . $mediaType)
+            ->addHeaderLine('Content-Type: ' . $mediaType)
             ->addHeaderLine('Content-Disposition: ' . $mode . '; filename="' . $filename . '"')
             ->addHeaderLine('Content-Transfer-Encoding', 'binary')
-            ->addHeaderLine('Content-length: ' . $fileSize)
-            ->addHeaderLine('Cache-control: ' . $cacheControl)
+            ->addHeaderLine('Content-Length: ' . $fileSize)
+            ->addHeaderLine('Cache-Control: ' . $cacheControl)
             ->addHeaderLine('Content-Description: ' . 'File Transfer');
 
         foreach ($specificHeaders as $header) {

@@ -1,7 +1,9 @@
-html body.minimal {
-    width: 98%;
-}
-html body.minimal div[role="main"] {
-    padding: 12px;
-    padding: 48px;
+@media screen {
+    html body.minimal {
+        width: 98%;
+    }
+    html body.minimal div[role="main"] {
+        padding: 12px;
+        padding: 48px;
+    }
 }

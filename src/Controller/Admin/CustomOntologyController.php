@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace CustomOntology\Controller\Admin;
 
 use CustomOntology\Form\CustomOntologyForm;
@@ -84,31 +85,32 @@ class CustomOntologyController extends AbstractActionController
 
         $params = $form->getData();
         $action = $this->params()->fromPost('submit', 'submit');
+        $isSubmit = $action !== 'download';
+        $isDownload = $action === 'download';
 
         // TODO Move validation inside form.
         $valid = [];
-        $valid['ontology'] = $this->validateOntology(
-            $params['ontology_fieldset'],
-            $action !== 'download'
-        );
+        $valid['ontology'] = $this->validateOntology($params['ontology_fieldset'], $isSubmit);
         if ($valid['ontology'] && $valid['ontology']['o:prefix']) {
             $this->ontologyPrefix = $valid['ontology']['o:prefix'];
         }
 
         $valid['resource_classes'] = $this->validateResourceClasses(
             $params['resource_classes_fieldset']['resource_classes'],
-            $action === 'download'
+            $isDownload
         );
         $valid['properties'] = $this->validateProperties(
             $params['properties_fieldset']['properties'],
-            $action === 'download'
+            $isDownload
         );
 
         if (is_null($valid['ontology'])
             || is_null($valid['resource_classes'])
             || is_null($valid['properties'])
         ) {
-            $this->messenger()->addWarning('An error was found. Turtle cannot be created. Nothing was imported.'); // @translate
+            $this->messenger()->addWarning(
+                'An error was found. Turtle cannot be created. Nothing was imported.' // @translate
+            );
             return $view;
         }
 
@@ -117,13 +119,12 @@ class CustomOntologyController extends AbstractActionController
             return $view;
         }
 
-        if ($action === 'download') {
+        if ($isDownload) {
             $turtle = $this->createTurtle($valid);
             if (empty($turtle)) {
                 $this->messenger()->addError(sprintf('Unable to create the ontology.')); // @translate
                 return $view;
             }
-
             $filename = (empty($valid['ontology']['o:prefix']) ? 'ontology' : $valid['ontology']['o:prefix']) . '.ttl';
             return $this->responseAsFile($turtle, $filename, 'text/turtle');
         }
@@ -281,7 +282,7 @@ class CustomOntologyController extends AbstractActionController
      * Check if the elements are valid.
      *
      * @param string $elements
-     * @param string $type "resouce_classes" or "properties"
+     * @param string $type "resource_classes" or "properties"
      * @param bool $keepExisting Keep all good elements in the returned array,
      * even if the elements that exist in Omeka.
      * @return array|null Null if error.
@@ -544,7 +545,7 @@ class CustomOntologyController extends AbstractActionController
      * custom elements. The method doesn't flush created elements.
      *
      * @param array $elements
-     * @param string $type "resouce_classes" or "properties"
+     * @param string $type "resource_classes" or "properties"
      * @return bool|null
      */
     protected function saveElements(array $elements, $type)

@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace CustomOntology\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -18,42 +19,37 @@ class NsController extends AbstractActionController
             }
         }
 
-        $view = new ViewModel;
-        $view->setVariable('ontologies', $ontologies);
-        return $view;
+        return new ViewModel([
+            'ontologies' => $ontologies,
+        ]);
     }
 
     public function showAction()
     {
-        $view = new ViewModel;
         $prefix = $this->params()->fromRoute('prefix');
 
-        $vocabulary = $this->api()->searchOne('vocabularies', [
+        // Throw exception automatically.
+        $vocabulary = $this->api()->read('vocabularies', [
             'prefix' => $prefix,
         ])->getContent();
-
-        if (empty($vocabulary)) {
-            return $this->notFoundAction();
-        }
 
         if (!$this->isOntologyManaged($vocabulary)) {
             return $this->notFoundAction();
         }
 
+        // Default is turtle.
+
         $format = $this->params()->fromQuery('format');
-        switch ($format) {
-            case 'html':
-                break;
-            case 'turtle':
-            default:
-                $ontology = $this->convertVocabularyToOntology($vocabulary);
-                $turtle = $this->createTurtle($ontology);
-                return $this->responseAsFile($turtle);
+
+        if ($format !== 'html') {
+            $ontology = $this->convertVocabularyToOntology($vocabulary);
+            $turtle = $this->createTurtle($ontology);
+            return $this->responseAsFile($turtle);
         }
 
-        $view = new ViewModel;
-        $view->setVariable('ontology', $vocabulary);
-        return $view;
+        return new ViewModel([
+            'ontology' => $vocabulary,
+        ]);
     }
 
     /**
