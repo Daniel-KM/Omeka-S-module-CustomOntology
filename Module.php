@@ -5,6 +5,7 @@ namespace CustomOntology;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\MvcEvent;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use Omeka\Module\AbstractModule;
 
 /**
@@ -21,6 +22,19 @@ class Module extends AbstractModule
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
+    }
+
+    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $services)
+    {
+        $plugins = $services->get('ControllerPluginManager');
+        $translate = $plugins->get('translate');
+        $messenger = $plugins->get('messenger');
+
+        if (version_compare($oldVersion, '3.4.6', '<')) {
+            $messenger->addSuccess(
+                $translate('A new button was added in main menu "Vocabularies".') // @translate );
+            );
+        }
     }
 
     public function onBootstrap(MvcEvent $event): void
