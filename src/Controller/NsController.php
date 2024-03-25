@@ -2,6 +2,7 @@
 
 namespace CustomOntology\Controller;
 
+use EasyRdf\Graph;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Omeka\Api\Representation\VocabularyRepresentation;
@@ -37,12 +38,15 @@ class NsController extends AbstractActionController
             return $this->notFoundAction();
         }
 
-        // Default is turtle.
+        // Get format. Default is turtle.
 
         $supportedFormats = [
             'text/turtle' => 'turtle',
             'application/ld+json' => 'json-ld',
+            'application/n-triples' =>'n-triples',
+            'application/rdf+xml' => 'rdf-xml',
             'text/html' => 'html',
+            'text/n3' =>'n3',
         ];
 
         $format = $this->params()->fromQuery('format');
@@ -57,6 +61,8 @@ class NsController extends AbstractActionController
              */
             $headers = $this->getRequest()->getHeaders();
             $accept = $headers->get('Accept');
+            // Check prefered format first.
+            $acceptFirst = $accept ? strtok($accept->getFieldValue(), ',') : null;
             // Normally, Content-Type is not used in request.
             $contentType = $headers->get('Content-Type');
             $supportedFormatString = $contentType ? trim(substr($contentType->toString(), strlen('Content-Type:'))) : null;
@@ -64,32 +70,50 @@ class NsController extends AbstractActionController
                 $format = $supportedFormats[$supportedFormatString];
             } elseif (!$accept || $accept->toString() === 'Accept: */*') {
                 $format = 'turtle';
+            } elseif (isset($supportedFormats[$acceptFirst])) {
+                $format = $supportedFormats[$acceptFirst];
             } else {
-                // Check prefered format first.
-                $acceptFirst = strtok($accept->getFieldValue(), ',');
-                if (isset($supportedFormats[$acceptFirst])) {
-                    $format = $supportedFormats[$acceptFirst];
-                } else {
-                    foreach ($supportedFormats as $mediaType => $supportedFormat) {
-                        if ($accept->match([$mediaType])) {
-                            $format = $supportedFormat;
-                        }
+                foreach ($supportedFormats as $mediaType => $supportedFormat) {
+                    if ($accept->match([$mediaType])) {
+                        $format = $supportedFormat;
                     }
                 }
             }
         }
 
-        if ($format === 'json-ld') {
-            return $this->responseAsFile(json_encode($vocabulary, 448));
-        } elseif ($format !== 'html') {
-            $ontology = $this->convertVocabularyToOntology($vocabulary);
-            $turtle = $this->createTurtle($ontology);
-            return $this->responseAsFile($turtle);
+        // Output format.
+
+        if ($format === 'html') {
+            return new ViewModel([
+                'ontology' => $vocabulary,
+            ]);
         }
 
-        return new ViewModel([
-            'ontology' => $vocabulary,
-        ]);
+        $extensions = [
+            'text/turtle' => 'turtle',
+            'application/ld+json' => 'json-ld',
+            'application/n-triples' =>'nt',
+            'application/rdf+xml' => 'rdf.xml',
+            'text/html' => 'html',
+            'text/n3' =>'n3',
+        ];
+
+        // Output the ontology, not the omeka vocabulary, even for json-ld.
+        $ontology = $this->convertVocabularyToOntology($vocabulary);
+        $turtle = $this->createTurtle($ontology);
+        $graph = new Graph;
+        $graph->parse($turtle, 'turtle');
+        if (in_array($format, ['n3', 'n-triples', 'rdf-xml'])) {
+            $mediaType = array_search($format, $supportedFormats);
+            $output = $graph->serialise(str_replace('-', '', $format));
+            return $this->responseAsFile($output, $prefix . '.' . $extensions[$mediaType], $mediaType);
+        } elseif ($format === 'json-ld') {
+            $output = $graph->serialise(str_replace('-', '', $format));
+            $output = json_encode(json_decode($output), 448);
+            return $this->responseAsFile($output, "$prefix.json-ld", 'application/ld+json');
+        } else {
+            return $this->responseAsFile($turtle, "$prefix.turtle", 'text/turtle');
+        }
     }
 
     /**

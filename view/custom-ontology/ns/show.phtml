@@ -5,6 +5,7 @@
  */
 
 $plugins = $this->getHelperPluginManager();
+$url = $this->plugin('url');
 $escape = $this->plugin('escapeHtml');
 $assetUrl = $this->plugin('assetUrl');
 $translate = $plugins->get('translate');
@@ -14,15 +15,25 @@ $this->headLink()
     ->prependStylesheet($assetUrl('vendor/tablesaw/tablesaw.stackonly.css', 'Omeka'));
 $this->headScript()
     ->prependFile($assetUrl('vendor/tablesaw/tablesaw.stackonly.jquery.js', 'Omeka'), 'text/javascript', ['defer' => 'defer']);
+
+$uri = $ontology->namespaceUri();
+$prefix = $ontology->prefix();
 ?>
 
 <h3><?= $translate($ontology->label()) ?></h3>
 
 <ul>
-    <li class="vocabulary-uri"><?= sprintf($translate('Namespace uri: %s'), $ontology->namespaceUri()) ?></li>
-    <li class="vocabulary-prefix"><?= sprintf($translate('Recommended prefix: %s'), '<strong>' . $ontology->prefix() . '</strong>') ?></li>
-    <li class="vocabulary-link"><?= sprintf($translate('As %1$sturtle%2$s'), sprintf('<a href="%s" type="text/turtle">', $ontology->namespaceUri() . '?format=turtle'), '</a>') ?></li>
-    <li class="vocabulary-link"><?= sprintf($translate('As %1$sjson-ld%2$s'), sprintf('<a href="%s" type="application/ld+json">', $ontology->apiUrl()), '</a>') ?></li>
+    <li class="vocabulary-uri"><?= sprintf($translate('Namespace uri: %s'), $uri) ?></li>
+    <li class="vocabulary-prefix"><?= sprintf($translate('Recommended prefix: %s'), '<strong>' . $prefix . '</strong>') ?></li>
+    <li class="vocabulary-links"><?= sprintf($translate('%1$shuman%2$s | %3$sturtle%2$s | %4$sjson-ld%2$s | %5$sn3%2$s | %6$sn-triples%2$s | %7$srdf-xml%2$s'),
+            '<a href="' . $url('ns/prefix', ['prefix' => $prefix]) . '">',
+            '</a>',
+            '<a href="' . $uri . '?format=turtle" download="' . $prefix . '.turtle" type="text/turtle">',
+            '<a href="' . $uri . '?format=json-ld" download="' . $prefix . '.json-ld" type="application/ld+json">',
+            '<a href="' . $uri . '?format=n3" download="' . $prefix . '.n3" type="text/n3">',
+            '<a href="' . $uri . '?format=n-triples" download="' . $prefix . '.nt" type="application/n-triples">',
+            '<a href="' . $uri . '?format=rdf-xml" download="' . $prefix . '.rdf.xml" type="application/rdf+xml">'
+        )?></dd>
 </ul>
 <?php if ($comment = $ontology->comment()): ?>
 <p><?= $translate($comment) ?>

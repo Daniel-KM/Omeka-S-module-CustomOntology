@@ -16,16 +16,22 @@ $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 
 <p><?= $translate('There are no custom ontology.') ?></p>
 <?php else: ?>
 <ul>
-<?php foreach ($ontologies as $ontology): ?>
+<?php foreach ($ontologies as $ontology):
+    $uri = $ontology->namespaceUri();
+    $prefix = $ontology->prefix();
+    ?>
     <li>
         <dt><?= $ontology->label() ?></dt>
-        <dd><?= sprintf($translate('%1$s (%2$shuman%5$s | %3$sturtle%5$s | %4$sjson-ld%5$s) [recommended prefix: %6$s]'),
-            $ontology->namespaceUri(),
-            '<a href="' . $url('ns/prefix', ['prefix' => $ontology->prefix()]) . '">',
-            '<a href="' . $ontology->namespaceUri() . '?format=turtle" type="text/turtle">',
-            '<a href="' . $ontology->apiUrl() . '" type="application/ld+json">',
+        <dd><?= sprintf($translate('Namespace uri: %s'), $uri) ?></dd>
+        <dd><?= sprintf($translate('Recommended prefix: %s'), '<strong>' . $prefix . '</strong>') ?></dd>
+        <dd><?= sprintf($translate('%1$shuman%2$s | %3$sturtle%2$s | %4$sjson-ld%2$s | %5$sn3%2$s | %6$sn-triples%2$s | %7$srdf-xml%2$s'),
+            '<a href="' . $url('ns/prefix', ['prefix' => $prefix]) . '">',
             '</a>',
-            '<strong>' . $ontology->prefix() . '</strong>'
+            '<a href="' . $uri . '?format=turtle" download="' . $prefix . '.turtle" type="text/turtle">',
+            '<a href="' . $uri . '?format=json-ld" download="' . $prefix . '.json-ld" type="application/ld+json">',
+            '<a href="' . $uri . '?format=n3" download="' . $prefix . '.n3" type="text/n3">',
+            '<a href="' . $uri . '?format=n-triples" download="' . $prefix . '.nt" type="application/n-triples">',
+            '<a href="' . $uri . '?format=rdf-xml" download="' . $prefix . '.rdf.xml" type="application/rdf+xml">'
         ) ?></dd>
     </li>
 <?php endforeach; ?>
