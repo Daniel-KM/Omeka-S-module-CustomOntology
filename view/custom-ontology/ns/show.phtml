@@ -34,6 +34,7 @@ $prefix = $ontology->prefix();
             '<a href="' . $uri . '?format=n-triples" download="' . $prefix . '.nt" type="application/n-triples">',
             '<a href="' . $uri . '?format=rdf-xml" download="' . $prefix . '.rdf.xml" type="application/rdf+xml">'
         )?></dd>
+    <li><?= $translate('HTTP Content-Negociation is supported.') ?></li>
 </ul>
 <?php if ($comment = $ontology->comment()): ?>
 <p><?= $translate($comment) ?>
