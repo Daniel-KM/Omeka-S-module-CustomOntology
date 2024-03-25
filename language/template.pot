@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-05 00:00+0000\n"
+"POT-Creation-Date: 2024-03-25 00:00+0000"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,372 +17,385 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/Mvc/Controller/Plugin/CreateTurtle.php:30
+#: Module.php:35
+msgid "A new button was added in main menu \"Vocabularies\"."
+msgstr ""
+
+#: Module.php:79
+msgid "Create a vocabulary"
+msgstr ""
+
+#: src/Mvc/Controller/Plugin/CreateTurtle.php:31
 #, php-format
 msgid "Error: unknown vocabulary for \"%1$s\" \"%2$s\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:16
-msgid "Custom ontologies"
-msgstr ""
-
-#: view/custom-ontology/admin/custom-ontology/index.phtml:19
-msgid "Get turtle"
-msgstr ""
-
 #: view/custom-ontology/admin/custom-ontology/index.phtml:24
+msgid "Create a custom ontology"
+msgstr ""
+
+#: view/custom-ontology/admin/custom-ontology/index.phtml:31
 msgid ""
 "To create an ontology, classes and/or properties, fill the appropriate "
 "following fields."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:25
+#: view/custom-ontology/admin/custom-ontology/index.phtml:32
 msgid ""
 "The next three forms are independant, and can be used together (for a new "
 "ontology) or separately (to add new elements to an existing ontology)."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:28
-#, php-format
+#: view/custom-ontology/admin/custom-ontology/index.phtml:36
 msgid ""
-"Once filled, click \"Get turtle\" to get the %1$sTurtle%2$s formatted "
-"ontology, if wanted."
+"Once filled, click \"Submit\" to import the ontology or the new classes or "
+"properties directly in Omeka S."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:30
+#: view/custom-ontology/admin/custom-ontology/index.phtml:37
 #, php-format
 msgid ""
-"Finally, click \"Submit\" to import it directly in Omeka S (or import the "
-"Notation3 file yourself via the page %1$sImport vocabulary%2$s)."
+"You may also click \"Get turtle\" below to get the %1$sTurtle%3$s formatted "
+"ontology, if wanted, and import it yourself via the page %2$sImport "
+"vocabulary%3$s."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:32
+#: view/custom-ontology/admin/custom-ontology/index.phtml:42
 #, php-format
 msgid ""
 "The ontologies that use the proposed namespace uri are available as human "
 "and as turtle publicly %1$shere%2$s."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:37
+#: view/custom-ontology/admin/custom-ontology/index.phtml:47
 msgid "Warning:"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:38
+#: view/custom-ontology/admin/custom-ontology/index.phtml:48
 msgid ""
 "After checks, there is no possibility to correct data here, but only to add "
 "new elements."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:39
+#: view/custom-ontology/admin/custom-ontology/index.phtml:49
 #, php-format
 msgid ""
-"Nevertheless, the vocabularies can be managed like any other %1$svocabularies"
-"%2$s via the turtle files, that are editable via any standard true text "
-"editor."
+"Nevertheless, the vocabularies can be managed like any other "
+"%1$svocabularies%2$s via the turtle files, that are editable via any "
+"standard true text editor."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:43
+#: view/custom-ontology/admin/custom-ontology/index.phtml:55
 msgid "Create a specific ontology"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:45
+#: view/custom-ontology/admin/custom-ontology/index.phtml:57
 msgid "An ontology must have a namespace uri and a unique lowercase prefix."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:46
+#: view/custom-ontology/admin/custom-ontology/index.phtml:58
 msgid ""
 "It is recommended to use the default namespace uri with the prefix, so it "
 "will be possible to publish the ontology automatically."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:48
+#: view/custom-ontology/admin/custom-ontology/index.phtml:60
 #, php-format
 msgid ""
 "It is recommended to end it with a \"/\" or a \"#\", so classes and "
 "properties will have their own uri, for example %s."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:49
+#: view/custom-ontology/admin/custom-ontology/index.phtml:61
 #, php-format
 msgid "The format can be a %scool uri%s or a %spersistent url%s."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:50
+#: view/custom-ontology/admin/custom-ontology/index.phtml:62
 msgid "It can contain a date or a version."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:51
+#: view/custom-ontology/admin/custom-ontology/index.phtml:63
 msgid "A label is required too, and a description can be added."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:57
+#: view/custom-ontology/admin/custom-ontology/index.phtml:69
 msgid "Create specific classes"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:59
+#: view/custom-ontology/admin/custom-ontology/index.phtml:71
 msgid ""
 "A class must be formatted with a prefix and a title-case local name, like "
 "\"dctype:PhysicalObject\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:60
+#: view/custom-ontology/admin/custom-ontology/index.phtml:72
 msgid "Multiple classes can be created, one by row."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:66
+#: view/custom-ontology/admin/custom-ontology/index.phtml:78
 msgid "Create specific properties"
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:68
+#: view/custom-ontology/admin/custom-ontology/index.phtml:80
 msgid ""
 "A property must be formatted with a prefix and a camel-case local name, like "
 "\"dcterms:isPartOf\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:69
+#: view/custom-ontology/admin/custom-ontology/index.phtml:81
 msgid "Multiple properties can be created, one by row."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:78
+#: view/custom-ontology/admin/custom-ontology/index.phtml:88
 msgid ""
 "Existing classes or properties will be skipped, so you can copy paste a full "
 "list."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:79
+#: view/custom-ontology/admin/custom-ontology/index.phtml:89
 msgid "The label is the string that follows the term, separated by a \",\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:80
+#: view/custom-ontology/admin/custom-ontology/index.phtml:90
 msgid "The comment is the string that follows the label, separated by a \",\"."
 msgstr ""
 
-#: view/custom-ontology/admin/custom-ontology/index.phtml:81
+#: view/custom-ontology/admin/custom-ontology/index.phtml:91
 msgid ""
 "It is not recommended to create new classes or properties inside standard "
 "ontologies: use only your own prefixes."
 msgstr ""
 
-#: view/custom-ontology/ns/browse.phtml:10
+#: view/custom-ontology/admin/custom-ontology/index.phtml:97
+msgid "Get turtle (no save)"
+msgstr ""
+
+#: view/custom-ontology/ns/browse.phtml:14
 msgid "List of custom ontologies"
 msgstr ""
 
-#: view/custom-ontology/ns/browse.phtml:12
+#: view/custom-ontology/ns/browse.phtml:16
 msgid "There are no custom ontology."
 msgstr ""
 
-#: view/custom-ontology/ns/browse.phtml:18
-#, php-format
-msgid "%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]"
-msgstr ""
-
-#: view/custom-ontology/ns/show.phtml:17
+#: view/custom-ontology/ns/browse.phtml:24
+#: view/custom-ontology/ns/show.phtml:22
 #, php-format
 msgid "Namespace uri: %s"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:18
+#: view/custom-ontology/ns/browse.phtml:25
+#: view/custom-ontology/ns/show.phtml:23
 #, php-format
 msgid "Recommended prefix: %s"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:19
+#: view/custom-ontology/ns/browse.phtml:26
+#: view/custom-ontology/ns/show.phtml:24
 #, php-format
-msgid "As %s"
+msgid ""
+"%1$shuman%2$s | %3$sturtle%2$s | %4$sjson-ld%2$s | %5$sn3%2$s | %6$sn-"
+"triples%2$s | %7$srdf-xml%2$s"
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:19
-msgid "turtle"
+#: view/custom-ontology/ns/browse.phtml:38
+#: view/custom-ontology/ns/show.phtml:33
+msgid "HTTP Content-Negociation is supported."
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:28
+#: view/custom-ontology/ns/show.phtml:42
 msgid "There are no classes."
 msgstr ""
 
-#: view/custom-ontology/ns/show.phtml:57
+#: view/custom-ontology/ns/show.phtml:71
 msgid "There are no properties."
 msgstr ""
 
-#: src/Form/CustomOntologyForm.php:19
+#: src/Form/CustomOntologyForm.php:22
 msgid "Ontology"
 msgstr ""
 
-#: src/Form/CustomOntologyForm.php:28
+#: src/Form/CustomOntologyForm.php:31
 msgid "Namespace uri"
 msgstr ""
 
-#: src/Form/CustomOntologyForm.php:41
+#: src/Form/CustomOntologyForm.php:44
 msgid "myprefix"
 msgstr ""
 
-#: src/Form/CustomOntologyForm.php:51
+#: src/Form/CustomOntologyForm.php:54
 msgid "My label"
 msgstr ""
 
-#: src/Form/CustomOntologyForm.php:61
+#: src/Form/CustomOntologyForm.php:64
 msgid "A specific ontology for my documents."
 msgstr ""
 
-#: src/Form/CustomOntologyForm.php:81
+#: src/Form/CustomOntologyForm.php:85
 msgid ""
 "myprefix:MySpecificClass, My specific class, A resource class to use for my "
 "specific documents."
 msgstr ""
 
-#: src/Form/CustomOntologyForm.php:102
+#: src/Form/CustomOntologyForm.php:107
 msgid ""
 "myprefix:mySpecificProperty, My specific property, A property to use for my "
 "specific documents."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:111
+#: src/Controller/Admin/CustomOntologyController.php:112
 msgid "An error was found. Turtle cannot be created. Nothing was imported."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:116
+#: src/Controller/Admin/CustomOntologyController.php:118
 msgid "Nothing to process."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:123
+#: src/Controller/Admin/CustomOntologyController.php:125
 msgid "Unable to create the ontology."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:147
+#: src/Controller/Admin/CustomOntologyController.php:148
 #, php-format
 msgid "The vocabulary \"%1$s\" (%2$s) has been created (%3$sapi%4$s)."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:166
+#: src/Controller/Admin/CustomOntologyController.php:167
 #, php-format
 msgid "%d resource classes have been created: %s."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:176
+#: src/Controller/Admin/CustomOntologyController.php:177
 #, php-format
 msgid "%d properties have been created: %s."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:199
+#: src/Controller/Admin/CustomOntologyController.php:200
 msgid "A namespace uri is set for the ontology, but there is no prefix."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:204
+#: src/Controller/Admin/CustomOntologyController.php:205
 msgid "A prefix is set for the ontology, but there is no namespace uri."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:211
+#: src/Controller/Admin/CustomOntologyController.php:212
 msgid "The prefix of the ontology must be lowercase."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:216
+#: src/Controller/Admin/CustomOntologyController.php:217
 msgid ""
 "The prefix must start with an alphabetic character and must contain only "
 "alphanumeric characters."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:221
+#: src/Controller/Admin/CustomOntologyController.php:222
 msgid "A label is required for the ontology."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:236
+#: src/Controller/Admin/CustomOntologyController.php:237
 #, php-format
 msgid "An ontology exists for the prefix \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:245
+#: src/Controller/Admin/CustomOntologyController.php:246
 #, php-format
 msgid "An ontology exists for the namespace uri \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:292
-#: src/Controller/Admin/CustomOntologyController.php:557
+#: src/Controller/Admin/CustomOntologyController.php:293
+#: src/Controller/Admin/CustomOntologyController.php:558
 msgid "Resource classes"
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:319
+#: src/Controller/Admin/CustomOntologyController.php:320
 #, php-format
 msgid "%s, row #%d"
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:326
+#: src/Controller/Admin/CustomOntologyController.php:327
 #, php-format
 msgid "%s: A content is defined, but no term."
-msgstr ""
-
-#: src/Controller/Admin/CustomOntologyController.php:336
-#: src/Controller/Admin/CustomOntologyController.php:348
-#, php-format
-msgid "%s: The term must be formatted \"prefix:LocalName\"."
 msgstr ""
 
 #: src/Controller/Admin/CustomOntologyController.php:337
 #: src/Controller/Admin/CustomOntologyController.php:349
 #, php-format
+msgid "%s: The term must be formatted \"prefix:LocalName\"."
+msgstr ""
+
+#: src/Controller/Admin/CustomOntologyController.php:338
+#: src/Controller/Admin/CustomOntologyController.php:350
+#, php-format
 msgid "%s: The term must be formatted \"prefix:localName\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:363
+#: src/Controller/Admin/CustomOntologyController.php:364
 #, php-format
 msgid ""
 "%s: The local name part of the term \"%s\" must start with a upper-case "
 "letter."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:373
+#: src/Controller/Admin/CustomOntologyController.php:374
 #, php-format
 msgid ""
 "%s: The local name part of the term \"%s\" must start with a lower-case "
 "letter."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:391
+#: src/Controller/Admin/CustomOntologyController.php:392
 #, php-format
 msgid ""
 "%s: The term \"%s\" must start with an alphabetic character and contain only "
 "alphanumeric characters, \"-\" and \"_\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:406
+#: src/Controller/Admin/CustomOntologyController.php:407
 #, php-format
 msgid "%s: No ontology exists for prefix \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:416
+#: src/Controller/Admin/CustomOntologyController.php:417
 #, php-format
 msgid ""
 "%s: For standardization purpose, this tool forbids to add a term to the "
 "default Dublin Core vocabularies \"%s\"."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:429
+#: src/Controller/Admin/CustomOntologyController.php:430
 #, php-format
 msgid "%s: The term \"%s\" exists and is skipped."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:446
+#: src/Controller/Admin/CustomOntologyController.php:447
 #, php-format
 msgid "%s: The prefix \"%s\" is reserved by Omeka."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:459
+#: src/Controller/Admin/CustomOntologyController.php:460
 #, php-format
 msgid "%s: The term \"%s\" must have a label."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:468
+#: src/Controller/Admin/CustomOntologyController.php:469
 #, php-format
 msgid "%s: The term \"%s\" is already specified above, row #%d."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:477
+#: src/Controller/Admin/CustomOntologyController.php:478
 #, php-format
 msgid "%s: The label \"%s\" is already used above, row #%d."
 msgstr ""
 
-#: src/Controller/Admin/CustomOntologyController.php:510
+#: src/Controller/Admin/CustomOntologyController.php:511
 msgid "An issue occurred when saving the ontology."
 msgstr ""
 
-#: config/module.config.php:83
+#: config/module.config.php:81
+msgid "navigation"
+msgstr ""
+
+#: config/module.config.php:101
 msgid "Custom ontology"
 msgstr ""
