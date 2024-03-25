@@ -79,10 +79,28 @@ return [
         ],
     ],
     'navigation' => [
+        /*// Not possible because keys are numeric in navigation.conf.
+        'AdminResource' => [
+            [
+                'pages' => [
+                    [
+                        'label' => 'Custom ontology', // @translate
+                        'class' => 'vocabularies',
+                        'route' => 'admin/default',
+                        'controller' => 'custom-ontology',
+                        'action' => 'browse',
+                        'resource' => 'Omeka\Controller\Admin\Vocabulary',
+                        'privilege' => 'create',
+                    ],
+                ],
+            ],
+        ],
+        */
         'AdminModule' => [
             [
                 'label' => 'Custom ontology', // @translate
                 'route' => 'admin/custom-ontology',
+                'class' => 'vocabularies',
                 'resource' => Controller\Admin\CustomOntologyController::class,
             ],
         ],

@@ -2,6 +2,8 @@
 
 namespace CustomOntology;
 
+use Laminas\EventManager\Event;
+use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\MvcEvent;
 use Omeka\Module\AbstractModule;
 
@@ -33,5 +35,36 @@ class Module extends AbstractModule
         $acl = $services->get('Omeka\Acl');
 
         $acl->allow(null, Controller\NsController::class);
+    }
+
+    public function attachListeners(SharedEventManagerInterface $sharedEventManager): void
+    {
+        $sharedEventManager->attach(
+            'Omeka\Controller\Admin\Vocabulary',
+            'view.layout',
+            [$this, 'handleViewLayout']
+        );
+    }
+
+    /**
+     * Add the button Create vocabulary.
+     */
+    public function handleViewLayout(Event $event): void
+    {
+        /** @var \Laminas\View\Renderer\PhpRenderer $view */
+        $view = $event->getTarget();
+
+        $params = $view->params()->fromRoute();
+        $action = $params['action'] ?? null;
+        if ($action !== 'browse') {
+            return;
+        }
+
+        $vars = $view->vars();
+
+        $html = $view->hyperlink($view->translate('Create a vocabulary'), $view->url('admin/custom-ontology'), ['class' => 'button']);
+        $content = $vars->offsetGet('content');
+        $content = str_replace('<div id="page-actions">', '<div id="page-actions">' . PHP_EOL . $html, $content);
+        $vars->offsetSet('content', $content);
     }
 }

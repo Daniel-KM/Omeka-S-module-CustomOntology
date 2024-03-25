@@ -8,6 +8,8 @@ $plugins = $this->getHelperPluginManager();
 $url = $plugins->get('url');
 $translate = $plugins->get('translate');
 
+$this->htmlElement('body')->appendAttribute('class', 'vocabularies vocabulary-add');
+
 $form->prepare();
 
 $ontologyFieldset = $form->get('ontology_fieldset');
