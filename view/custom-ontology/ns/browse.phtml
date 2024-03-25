@@ -19,10 +19,11 @@ $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 
 <?php foreach ($ontologies as $ontology): ?>
     <li>
         <dt><?= $ontology->label() ?></dt>
-        <dd><?= sprintf($translate('%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]'),
+        <dd><?= sprintf($translate('%1$s (%2$shuman%5$s | %3$sturtle%5$s | %4$sjson-ld%5$s) [recommended prefix: %6$s]'),
             $ontology->namespaceUri(),
-            '<a href="' . $url('ns/prefix', ['prefix' => $ontology->prefix()], ['query' => ['format' => 'html']]) . '">',
+            '<a href="' . $url('ns/prefix', ['prefix' => $ontology->prefix()]) . '">',
             '<a href="' . $ontology->namespaceUri() . '?format=turtle" type="text/turtle">',
+            '<a href="' . $ontology->apiUrl() . '" type="application/ld+json">',
             '</a>',
             '<strong>' . $ontology->prefix() . '</strong>'
         ) ?></dd>

@@ -22,6 +22,7 @@ $this->headScript()
     <li class="vocabulary-uri"><?= sprintf($translate('Namespace uri: %s'), $ontology->namespaceUri()) ?></li>
     <li class="vocabulary-prefix"><?= sprintf($translate('Recommended prefix: %s'), '<strong>' . $ontology->prefix() . '</strong>') ?></li>
     <li class="vocabulary-link"><?= sprintf($translate('As %1$sturtle%2$s'), sprintf('<a href="%s" type="text/turtle">', $ontology->namespaceUri() . '?format=turtle'), '</a>') ?></li>
+    <li class="vocabulary-link"><?= sprintf($translate('As %1$sjson-ld%2$s'), sprintf('<a href="%s" type="application/ld+json">', $ontology->apiUrl()), '</a>') ?></li>
 </ul>
 <?php if ($comment = $ontology->comment()): ?>
 <p><?= $translate($comment) ?>

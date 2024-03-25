@@ -39,27 +39,49 @@ class NsController extends AbstractActionController
 
         // Default is turtle.
 
+        $supportedFormats = [
+            'text/turtle' => 'turtle',
+            'application/ld+json' => 'json-ld',
+            'text/html' => 'html',
+        ];
+
         $format = $this->params()->fromQuery('format');
 
         // Content-Negociation if not forced by default.
-        if (!in_array($format, ['html', 'turtle'])) {
+        if (!in_array($format, $supportedFormats)) {
+            $format = null;
             /**
              * @var \Laminas\Http\Headers $headers
-             * @var \Laminas\Http\Header\ContentType $contentType
              * @var \Laminas\Http\Header\Accept $accept
+             * @var \Laminas\Http\Header\ContentType $contentType
              */
             $headers = $this->getRequest()->getHeaders();
-            $contentType = $headers->get('Content-Type');
             $accept = $headers->get('Accept');
-            $format = (
-                ($contentType && $contentType->match(['text/html']))
-                || ($accept && $accept->toString() !== 'Accept: */*' && $accept->toString() !== 'Accept: text/turtle')
-                )
-                ? 'html'
-                : 'turtle';
+            // Normally, Content-Type is not used in request.
+            $contentType = $headers->get('Content-Type');
+            $supportedFormatString = $contentType ? trim(substr($contentType->toString(), strlen('Content-Type:'))) : null;
+            if (isset($supportedFormats[$supportedFormatString])) {
+                $format = $supportedFormats[$supportedFormatString];
+            } elseif (!$accept || $accept->toString() === 'Accept: */*') {
+                $format = 'turtle';
+            } else {
+                // Check prefered format first.
+                $acceptFirst = strtok($accept->getFieldValue(), ',');
+                if (isset($supportedFormats[$acceptFirst])) {
+                    $format = $supportedFormats[$acceptFirst];
+                } else {
+                    foreach ($supportedFormats as $mediaType => $supportedFormat) {
+                        if ($accept->match([$mediaType])) {
+                            $format = $supportedFormat;
+                        }
+                    }
+                }
+            }
         }
 
-        if ($format !== 'html') {
+        if ($format === 'json-ld') {
+            return $this->responseAsFile(json_encode($vocabulary, 448));
+        } elseif ($format !== 'html') {
             $ontology = $this->convertVocabularyToOntology($vocabulary);
             $turtle = $this->createTurtle($ontology);
             return $this->responseAsFile($turtle);
