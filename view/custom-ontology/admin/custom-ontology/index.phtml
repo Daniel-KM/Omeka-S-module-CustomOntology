@@ -4,7 +4,9 @@
  * @var \CustomOntology\Form\CustomOntologyForm $form
  */
 
-$translate = $this->plugin('translate');
+$plugins = $this->getHelperPluginManager();
+$url = $plugins->get('url');
+$translate = $plugins->get('translate');
 
 $form->prepare();
 
@@ -13,38 +15,46 @@ $resourceClassesFieldset = $form->get('resource_classes_fieldset');
 $propertiesFieldset = $form->get('properties_fieldset');
 ?>
 
-<?= $this->pageTitle($translate('Custom ontologies')) ?>
-<?= $this->form()->openTag($form) ?>
-<fieldset id='page-actions'>
-    <button type="submit" name="submit" value="download"><?= $translate('Get turtle') ?></button>
-    <button type="submit" name="submit" value="submit"><?= $translate('Submit') ?></button>
+<style>
+    #page-actions-bottom { text-align: right; }
+</style>
+
+<?= $this->pageTitle($translate('Create a custom ontology'), 1, $translate('Vocabularies')); ?>
+
+<fieldset id="page-actions">
+    <button type="submit" name="submit" value="submit" form="form-custom-ontology"><?= $translate('Submit') ?></button>
 </fieldset>
 
 <p class="explanation">
     <?= $translate('To create an ontology, classes and/or properties, fill the appropriate following fields.') ?>
     <?= $translate('The next three forms are independant, and can be used together (for a new ontology) or separately (to add new elements to an existing ontology).') ?>
 </p>
+
 <p class="explanation">
-    <?= sprintf($translate('Once filled, click "Get turtle" to get the %1$sTurtle%2$s formatted ontology, if wanted.'),
-        '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">', '</a>') ?>
-    <?= sprintf($translate('Finally, click "Submit" to import it directly in Omeka S (or import the Notation3 file yourself via the page %1$sImport vocabulary%2$s).'),
-        '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary', 'action' => 'import']) . '">', '</a>') ?>
+    <?= $translate('Once filled, click "Submit" to import the ontology or the new classes or properties directly in Omeka S.') ?>
+    <?= sprintf($translate('You may also click "Get turtle" below to get the %1$sTurtle%3$s formatted ontology, if wanted, and import it yourself via the page %2$sImport vocabulary%3$s.'),
+        '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">',
+        '<a href="' . $url('admin/default', ['controller' => 'vocabulary', 'action' => 'import']) . '">',
+        '</a>'
+    ) ?>
     <?= sprintf($translate('The ontologies that use the proposed namespace uri are available as human and as turtle publicly %1$shere%2$s.'),
-        '<a href="' . $this->url('ns') . '">', '</a>') ?>
+        '<a href="' . $url('ns') . '">', '</a>') ?>
 </p>
 
 <p class="explanation">
     <b><?= $translate('Warning:') ?></b>
     <?= $translate('After checks, there is no possibility to correct data here, but only to add new elements.') ?>
     <?= sprintf($translate('Nevertheless, the vocabularies can be managed like any other %1$svocabularies%2$s via the turtle files, that are editable via any standard true text editor.'),
-        '<a href="' . $this->url('admin/default', ['controller' => 'vocabulary']) . '">', '</a>') ?>
+        '<a href="' . $url('admin/default', ['controller' => 'vocabulary']) . '">', '</a>') ?>
 </p>
+
+<?= $this->form()->openTag($form) ?>
 
 <h3><?= $translate('Create a specific ontology') ?></h3>
 <p class="explanation">
     <?= $translate('An ontology must have a namespace uri and a unique lowercase prefix.') ?>
     <?= $translate('It is recommended to use the default namespace uri with the prefix, so it will be possible to publish the ontology automatically.') ?>
-    <?php $sampleUrl = $this->url('ns/prefix', ['prefix' => 'myprefix'], ['force_canonical' => true]) . '/'; ?>
+    <?php $sampleUrl = $url('ns/prefix', ['prefix' => 'myprefix'], ['force_canonical' => true]) . '/'; ?>
     <?= sprintf($translate('It is recommended to end it with a "/" or a "#", so classes and properties will have their own uri, for example %s.'), '<code>' . $sampleUrl . '</code>') ?>
     <?= sprintf($translate('The format can be a %scool uri%s or a %spersistent url%s.'), '<a href="https://www.w3.org/Provider/Style/URI" target="_blank">', '</a>', '<a href="https://purl.org" target="_blank">', '</a>') ?>
     <?= $translate('It can contain a date or a version.') ?>
@@ -72,11 +82,15 @@ $propertiesFieldset = $form->get('properties_fieldset');
     <?= $this->formCollection($propertiesFieldset, false) ?>
 </p>
 
-<?= $this->form()->closeTag($form) ?>
-
 <p class="explanation">
     <?= $translate('Existing classes or properties will be skipped, so you can copy paste a full list.') ?>
     <?= $translate('The label is the string that follows the term, separated by a ",".') ?>
     <?= $translate('The comment is the string that follows the label, separated by a ",".') ?>
     <?= $translate('It is not recommended to create new classes or properties inside standard ontologies: use only your own prefixes.') ?>
 </p>
+
+<?= $this->form()->closeTag($form) ?>
+
+<fieldset id="page-actions-bottom">
+    <button type="submit" name="submit" value="download" form="form-custom-ontology"><?= $translate('Get turtle (no save)') ?></button>
+</fieldset>

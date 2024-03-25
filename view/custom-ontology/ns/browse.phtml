@@ -1,14 +1,18 @@
 <?php
 /**
  * @var \Laminas\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\VocabularyRepresentation[] $ontologies
  */
 
-$translate = $this->plugin('translate');
+$plugins = $this->getHelperPluginManager();
+$url = $plugins->get('url');
+$translate = $plugins->get('translate');
+
 $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 'CustomOntology'));
 ?>
 
 <h3><?= $translate('List of custom ontologies') ?></h3>
-<?php if (empty($ontologies)): ?>
+<?php if (!count($ontologies)): ?>
 <p><?= $translate('There are no custom ontology.') ?></p>
 <?php else: ?>
 <ul>
@@ -16,13 +20,12 @@ $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 
     <li>
         <dt><?= $ontology->label() ?></dt>
         <dd><?= sprintf($translate('%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]'),
-                $ontology->namespaceUri(),
-                '<a href="' . $this->url('ns/prefix', ['prefix' => $ontology->prefix()], ['query' => ['format' => 'html']]) . '">',
-                '<a href="' . $ontology->namespaceUri() . '">',
-                '</a>',
-                $ontology->prefix()
-            )
-        ?></dd>
+            $ontology->namespaceUri(),
+            '<a href="' . $url('ns/prefix', ['prefix' => $ontology->prefix()], ['query' => ['format' => 'html']]) . '">',
+            '<a href="' . $ontology->namespaceUri() . '">',
+            '</a>',
+            '<strong>' . $ontology->prefix() . '</strong>'
+        ) ?></dd>
     </li>
 <?php endforeach; ?>
 </ul>
