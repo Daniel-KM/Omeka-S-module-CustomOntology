@@ -117,7 +117,7 @@ class NsController extends AbstractActionController
     }
 
     /**
-     * Check if a vocabulary is managed as a custom ontology.
+     * Check if a vocabulary is a custom ontology (local domain or localhost).
      *
      * @param VocabularyRepresentation $ontology
      * @return bool
@@ -128,8 +128,12 @@ class NsController extends AbstractActionController
         $namespaceUri = $ontology->namespaceUri();
         $prefix = $ontology->prefix();
         $ns = $urlHelper('ns/prefix', ['prefix' => $prefix], ['force_canonical' => true]);
-        $ns = rtrim($ns, '/#');
-        return strpos($namespaceUri, $ns) === 0;
+        // Check localhost to simplify local usage.
+        $nsr = $urlHelper('ns/prefix', ['prefix' => $prefix]);
+        $nsr = '://localhost' . $nsr;
+        return strpos($namespaceUri, $ns) === 0
+            || strpos($namespaceUri, 'http' . $nsr) === 0
+            || strpos($namespaceUri, 'https' . $nsr) === 0;
     }
 
     /**
