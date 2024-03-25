@@ -35,7 +35,7 @@ $propertiesFieldset = $form->get('properties_fieldset');
 <p class="explanation">
     <?= $translate('Once filled, click "Submit" to import the ontology or the new classes or properties directly in Omeka S.') ?>
     <?= sprintf($translate('You may also click "Get turtle" below to get the %1$sTurtle%3$s formatted ontology, if wanted, and import it yourself via the page %2$sImport vocabulary%3$s.'),
-        '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank">',
+        '<a href="https://wikipedia.org/wiki/Turtle_(syntax)" target="_blank" rel="noopener">',
         '<a href="' . $url('admin/default', ['controller' => 'vocabulary', 'action' => 'import']) . '">',
         '</a>'
     ) ?>
@@ -58,7 +58,7 @@ $propertiesFieldset = $form->get('properties_fieldset');
     <?= $translate('It is recommended to use the default namespace uri with the prefix, so it will be possible to publish the ontology automatically.') ?>
     <?php $sampleUrl = $url('ns/prefix', ['prefix' => 'myprefix'], ['force_canonical' => true]) . '/'; ?>
     <?= sprintf($translate('It is recommended to end it with a "/" or a "#", so classes and properties will have their own uri, for example %s.'), '<code>' . $sampleUrl . '</code>') ?>
-    <?= sprintf($translate('The format can be a %scool uri%s or a %spersistent url%s.'), '<a href="https://www.w3.org/Provider/Style/URI" target="_blank">', '</a>', '<a href="https://purl.org" target="_blank">', '</a>') ?>
+    <?= sprintf($translate('The format can be a %scool uri%s or a %spersistent url%s.'), '<a href="https://www.w3.org/Provider/Style/URI" target="_blank" rel="noopener">', '</a>', '<a href="https://purl.org" target="_blank" rel="noopener">', '</a>') ?>
     <?= $translate('It can contain a date or a version.') ?>
     <?= $translate('A label is required too, and a description can be added.') ?>
 </p>
