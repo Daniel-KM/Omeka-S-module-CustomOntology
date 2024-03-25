@@ -22,7 +22,7 @@ $this->headLink()->prependStylesheet($this->assetUrl('css/custom-ontology.css', 
         <dd><?= sprintf($translate('%1$s (%2$shuman%4$s | %3$sturtle%4$s) [recommended prefix: %5$s]'),
             $ontology->namespaceUri(),
             '<a href="' . $url('ns/prefix', ['prefix' => $ontology->prefix()], ['query' => ['format' => 'html']]) . '">',
-            '<a href="' . $ontology->namespaceUri() . '">',
+            '<a href="' . $ontology->namespaceUri() . '?format=turtle" type="text/turtle">',
             '</a>',
             '<strong>' . $ontology->prefix() . '</strong>'
         ) ?></dd>

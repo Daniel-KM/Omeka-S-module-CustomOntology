@@ -8,7 +8,6 @@ $plugins = $this->getHelperPluginManager();
 $escape = $this->plugin('escapeHtml');
 $assetUrl = $this->plugin('assetUrl');
 $translate = $plugins->get('translate');
-$hyperlink = $plugins->get('hyperlink');
 
 $this->headLink()
     ->prependStylesheet($assetUrl('css/custom-ontology.css', 'CustomOntology'))
@@ -22,7 +21,7 @@ $this->headScript()
 <ul>
     <li class="vocabulary-uri"><?= sprintf($translate('Namespace uri: %s'), $ontology->namespaceUri()) ?></li>
     <li class="vocabulary-prefix"><?= sprintf($translate('Recommended prefix: %s'), '<strong>' . $ontology->prefix() . '</strong>') ?></li>
-    <li class="vocabulary-links"><?= sprintf($translate('As %s'), $hyperlink($translate('turtle'), $ontology->namespaceUri())) ?></li>
+    <li class="vocabulary-link"><?= sprintf($translate('As %1$sturtle%2$s'), sprintf('<a href="%s" type="text/turtle">', $ontology->namespaceUri() . '?format=turtle'), '</a>') ?></li>
 </ul>
 <?php if ($comment = $ontology->comment()): ?>
 <p><?= $translate($comment) ?>

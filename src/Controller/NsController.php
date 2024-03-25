@@ -41,6 +41,24 @@ class NsController extends AbstractActionController
 
         $format = $this->params()->fromQuery('format');
 
+        // Content-Negociation if not forced by default.
+        if (!in_array($format, ['html', 'turtle'])) {
+            /**
+             * @var \Laminas\Http\Headers $headers
+             * @var \Laminas\Http\Header\ContentType $contentType
+             * @var \Laminas\Http\Header\Accept $accept
+             */
+            $headers = $this->getRequest()->getHeaders();
+            $contentType = $headers->get('Content-Type');
+            $accept = $headers->get('Accept');
+            $format = (
+                ($contentType && $contentType->match(['text/html']))
+                || ($accept && $accept->toString() !== 'Accept: */*' && $accept->toString() !== 'Accept: text/turtle')
+                )
+                ? 'html'
+                : 'turtle';
+        }
+
         if ($format !== 'html') {
             $ontology = $this->convertVocabularyToOntology($vocabulary);
             $turtle = $this->createTurtle($ontology);
