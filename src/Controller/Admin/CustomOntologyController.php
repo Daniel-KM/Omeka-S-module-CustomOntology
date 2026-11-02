@@ -104,9 +104,9 @@ class CustomOntologyController extends AbstractActionController
             $isDownload
         );
 
-        if (is_null($valid['ontology'])
-            || is_null($valid['resource_classes'])
-            || is_null($valid['properties'])
+        if ($valid['ontology'] === null
+            || $valid['resource_classes'] === null
+            || $valid['properties'] === null
         ) {
             $this->messenger()->addWarning(
                 'An error was found. Turtle cannot be created. Nothing was imported.' // @translate
