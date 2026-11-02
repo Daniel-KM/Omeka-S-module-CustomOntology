@@ -159,6 +159,6 @@ TURTLE;
             "\r" => '\\r',
             "\n" => '\\n',
         ];
-        return str_replace(array_keys($replace), array_values($replace), $string);
+        return strtr($string, $replace);
     }
 }

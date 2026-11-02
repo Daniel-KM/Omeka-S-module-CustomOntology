@@ -314,8 +314,8 @@ class CustomOntologyController extends AbstractActionController
         $addedTerms = [];
         $addedLabels = [];
 
-        // The str_replace() allows to fix Apple copy/paste.
-        $elements = array_filter(array_map('trim', explode("\n", str_replace(["\r\n", "\n\r", "\r"], ["\n", "\n", "\n"], $elements))));
+        // The strtr() allows to fix Apple copy/paste.
+        $elements = array_filter(array_map('trim', explode("\n", strtr($elements, ["\r\n" => "\n", "\n\r" => "\n", "\r" => "\n"]))));
 
         foreach ($elements as $key => $elementString) {
             $row = $key + 1;

@@ -105,10 +105,10 @@ class NsController extends AbstractActionController
         $graph->parse($turtle, 'turtle');
         if (in_array($format, ['n3', 'n-triples', 'rdf-xml'])) {
             $mediaType = array_search($format, $supportedFormats);
-            $output = $graph->serialise(str_replace('-', '', $format));
+            $output = $graph->serialise(strtr($format, ['-' => '']));
             return $this->responseAsFile($output, $prefix . '.' . $extensions[$mediaType], $mediaType);
         } elseif ($format === 'json-ld') {
-            $output = $graph->serialise(str_replace('-', '', $format));
+            $output = $graph->serialise(strtr($format, ['-' => '']));
             $output = json_encode(json_decode($output), 448);
             return $this->responseAsFile($output, "$prefix.json-ld", 'application/ld+json');
         } else {

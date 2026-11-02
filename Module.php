@@ -78,7 +78,7 @@ class Module extends AbstractModule
 
         $html = $view->hyperlink($view->translate('Create a vocabulary'), $view->url('admin/custom-ontology'), ['class' => 'button']);
         $content = $vars->offsetGet('content');
-        $content = str_replace('<div id="page-actions">', '<div id="page-actions">' . PHP_EOL . $html, $content);
+        $content = strtr($content, ['<div id="page-actions">' => '<div id="page-actions">' . PHP_EOL . $html]);
         $vars->offsetSet('content', $content);
     }
 }
