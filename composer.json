@@ -1,28 +1,29 @@
 {
     "name": "daniel-km/omeka-s-module-custom-ontology",
-    "description": "Custom Ontology (module for Omeka S)",
-    "type": "library",
+    "type": "omeka-s-module",
+    "description": "Module for Omeka S: Create specific classes and properties to describe resources when no standard ontologies can be used.",
+    "keywords": [
+        "Omeka S",
+        "Omeka S module",
+        "ontology",
+        "vocabulary",
+        "class",
+        "property"
+    ],
     "license": "CECILL-2.1",
+    "homepage": "https://gitlab.com/Daniel-KM/Omeka-S-module-CustomOntology",
     "authors": [
         {
             "name": "Daniel Berthereau",
             "email": "Daniel.packagist@Berthereau.net"
         }
     ],
-    "homepage": "https://gitlab.com/Daniel-KM/Omeka-S-module-CustomOntology",
     "support": {
         "issues": "https://gitlab.com/Daniel-KM/Omeka-S-module-CustomOntology/-/issues",
         "forum": "https://forum.omeka.org/"
     },
-    "keywords": [
-        "Omeka S",
-        "module",
-        "ontology",
-        "vocabulary",
-        "property"
-    ],
-    "require-dev": {
-        "biblibre/omeka-s-test-helper": "dev-master"
+    "_require (not set until Omeka S merges PR #2432)": {
+        "omeka/omeka-s": "^3.1 || ^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -31,7 +32,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CustomOntologyTest\\": "test/CustomOntologyTest/"
+            "CustomOntologyTest\\": "tests/CustomOntologyTest/"
         }
+    },
+    "extra": {
+        "installer-name": "CustomOntology"
     }
 }
