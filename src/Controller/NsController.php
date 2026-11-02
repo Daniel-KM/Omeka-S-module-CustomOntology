@@ -43,10 +43,10 @@ class NsController extends AbstractActionController
         $supportedFormats = [
             'text/turtle' => 'turtle',
             'application/ld+json' => 'json-ld',
-            'application/n-triples' =>'n-triples',
+            'application/n-triples' => 'n-triples',
             'application/rdf+xml' => 'rdf-xml',
             'text/html' => 'html',
-            'text/n3' =>'n3',
+            'text/n3' => 'n3',
         ];
 
         $format = $this->params()->fromQuery('format');
@@ -92,10 +92,10 @@ class NsController extends AbstractActionController
         $extensions = [
             'text/turtle' => 'turtle',
             'application/ld+json' => 'json-ld',
-            'application/n-triples' =>'nt',
+            'application/n-triples' => 'nt',
             'application/rdf+xml' => 'rdf.xml',
             'text/html' => 'html',
-            'text/n3' =>'n3',
+            'text/n3' => 'n3',
         ];
 
         // Output the ontology, not the omeka vocabulary, even for json-ld.

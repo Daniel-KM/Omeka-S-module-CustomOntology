@@ -108,13 +108,5 @@ class CustomOntologyForm extends Form
                     'rows' => 10,
                 ],
             ]);
-
-        $inputFilter = $this->getInputFilter();
-        foreach ($this as $element) {
-            $inputFilter->add([
-                'name' => $element->getName(),
-                'required' => false,
-            ]);
-        }
     }
 }

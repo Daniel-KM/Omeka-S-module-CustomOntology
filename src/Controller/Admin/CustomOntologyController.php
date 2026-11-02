@@ -151,7 +151,7 @@ class CustomOntologyController extends AbstractActionController
                 'The vocabulary "%1$s" (%2$s) has been created (%3$sapi%4$s).', // @translate
                 '<a href="' . $urlHelper('admin/default', ['controller' => 'vocabulary']) . '">' . $vocabulary->label() . '</a>',
                 $vocabulary->prefix(),
-                '<a href="' . $urlHelper('api/default', ['resource' => 'vocabularies', 'id' => $vocabulary->id()]) . '" targer="_blank">', '</a>'
+                '<a href="' . $urlHelper('api/default', ['resource' => 'vocabularies', 'id' => $vocabulary->id()]) . '" target="_blank">', '</a>'
             );
             $message->setEscapeHtml(false);
             $this->messenger()->addSuccess($message);
@@ -163,9 +163,7 @@ class CustomOntologyController extends AbstractActionController
         $this->entityManager->flush();
 
         if ($resultResourceClasses) {
-            $createds = array_map(function ($v) {
-                return $v['term'];
-            }, $valid['resource_classes']);
+            $createds = array_map(fn ($v) => $v['term'], $valid['resource_classes']);
             $this->messenger()->addSuccess(new Message(
                 '%d resource classes have been created: %s.', // @translate
                 count($valid['resource_classes']), implode(', ', $createds)
@@ -173,9 +171,7 @@ class CustomOntologyController extends AbstractActionController
         }
 
         if ($resultProperties) {
-            $createds = array_map(function ($v) {
-                return $v['term'];
-            }, $valid['properties']);
+            $createds = array_map(fn ($v) => $v['term'], $valid['properties']);
             $this->messenger()->addSuccess(new Message(
                 '%d properties have been created: %s.', // @translate
                 count($valid['properties']), implode(', ', $createds)

@@ -14,7 +14,7 @@ use Omeka\Module\AbstractModule;
  * Create specific classes and properties to describe resources when no standard
  * ontologies can be used.
  *
- * @copyright Daniel Berthereau, 2018-2024
+ * @copyright Daniel Berthereau, 2018-2025
  * @license http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt
  */
 class Module extends AbstractModule
@@ -24,7 +24,7 @@ class Module extends AbstractModule
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $services)
+    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $services): void
     {
         $plugins = $services->get('ControllerPluginManager');
         $translate = $plugins->get('translate');
@@ -32,7 +32,7 @@ class Module extends AbstractModule
 
         if (version_compare($oldVersion, '3.4.6', '<')) {
             $messenger->addSuccess(
-                $translate('A new button was added in main menu "Vocabularies".') // @translate );
+                $translate('A new button was added in main menu "Vocabularies".') // @translate
             );
         }
     }

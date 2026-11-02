@@ -51,6 +51,11 @@ $propertiesFieldset = $form->get('properties_fieldset');
 </p>
 
 <?= $this->form()->openTag($form) ?>
+<?php foreach ($form->getElements() as $element): ?>
+<?php if ($element instanceof \Laminas\Form\Element\Csrf): ?>
+<?= $this->formElement($element) ?>
+<?php endif; ?>
+<?php endforeach; ?>
 
 <h3><?= $translate('Create a specific ontology') ?></h3>
 <p class="explanation">
