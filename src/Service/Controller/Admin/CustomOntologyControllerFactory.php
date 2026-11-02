@@ -3,8 +3,8 @@
 namespace CustomOntology\Service\Controller\Admin;
 
 use CustomOntology\Controller\Admin\CustomOntologyController;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class CustomOntologyControllerFactory implements FactoryInterface
 {
