@@ -628,7 +628,16 @@ class CustomOntologyController extends AbstractActionController
                     }
                 }
 
-                // TODO Check owner of the vocabulary?
+                // The terms are saved via the entity manager, so the rights are
+                // checked here.
+                if (!$this->userIsAllowed($vocabulary, 'update')) {
+                    $hasError = true;
+                    $this->messenger()->addError(new Message(
+                        '%s: You are not allowed to add a term to the vocabulary "%s".', // @translate
+                        $textMessage, $prefix
+                    ));
+                    continue;
+                }
 
                 $element['o:vocabulary'] = $vocabulary;
             }
