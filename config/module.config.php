@@ -29,6 +29,9 @@ return [
             'createTurtle' => Mvc\Controller\Plugin\CreateTurtle::class,
             'responseAsFile' => Mvc\Controller\Plugin\ResponseAsFile::class,
         ],
+        'factories' => [
+            'termUsages' => Service\ControllerPlugin\TermUsagesFactory::class,
+        ],
     ],
     'router' => [
         'routes' => [
