@@ -31,6 +31,7 @@ return [
             'responseAsFile' => Mvc\Controller\Plugin\ResponseAsFile::class,
         ],
         'factories' => [
+            'isManagedVocabulary' => Service\ControllerPlugin\IsManagedVocabularyFactory::class,
             'termUsages' => Service\ControllerPlugin\TermUsagesFactory::class,
         ],
     ],
