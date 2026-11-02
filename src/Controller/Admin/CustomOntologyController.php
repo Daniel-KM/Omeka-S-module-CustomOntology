@@ -218,6 +218,14 @@ class CustomOntologyController extends AbstractActionController
             return;
         }
 
+        if ($this->isReservedPrefix($ontology['o:prefix'])) {
+            $this->messenger()->addError(new Message(
+                'The prefix "%s" is reserved by Omeka.', // @translate
+                $ontology['o:prefix']
+            ));
+            return;
+        }
+
         if (!mb_strlen($ontology['o:label'])) {
             $this->messenger()->addError('A label is required for the ontology.'); // @translate
             return;
@@ -258,6 +266,21 @@ class CustomOntologyController extends AbstractActionController
         }
 
         return $ontology;
+    }
+
+    /**
+     * Check if a prefix is reserved by Omeka.
+     *
+     * The api refuses the reserved prefixes too, but without the reason.
+     */
+    protected function isReservedPrefix(string $prefix): bool
+    {
+        foreach ($this->reservedPrefixes as $reservedPrefix) {
+            if (preg_match("/$reservedPrefix/", $prefix)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -456,17 +479,6 @@ class CustomOntologyController extends AbstractActionController
             }
             // New ontology, specified in the post.
             else {
-                foreach ($this->reservedPrefixes as $reservedPrefix) {
-                    if (preg_match("/$reservedPrefix/", $prefix)) {
-                        $hasError = true;
-                        $this->messenger()->addError(new Message(
-                            '%s: The prefix "%s" is reserved by Omeka.', // @translate
-                            $textMessage, $prefix
-                        ));
-                        continue 2;
-                    }
-                }
-
                 $element['o:vocabulary'] = $prefix;
             }
 
