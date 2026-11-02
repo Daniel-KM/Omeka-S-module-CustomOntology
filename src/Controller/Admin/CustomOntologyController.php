@@ -233,7 +233,7 @@ class CustomOntologyController extends AbstractActionController
         $api = $this->api();
         try {
             $vocabulary = $api->read('vocabularies', ['prefix' => $ontology['o:prefix']])->getContent();
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $vocabulary = null;
         }
         if (!empty($vocabulary)) {
@@ -246,7 +246,7 @@ class CustomOntologyController extends AbstractActionController
 
         try {
             $vocabulary = $api->read('vocabularies', ['namespaceUri' => $ontology['o:namespace_uri']])->getContent();
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $vocabulary = null;
         }
         if (!empty($vocabulary)) {
@@ -410,7 +410,7 @@ class CustomOntologyController extends AbstractActionController
             $element['o:local_name'] = $matches[2];
             try {
                 $vocabulary = $api->read('vocabularies', ['prefix' => $prefix], [], ['responseContent' => 'resource'])->getContent();
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 $vocabulary = null;
             }
             if (empty($vocabulary) && $prefix !== $this->ontologyPrefix) {
@@ -438,7 +438,7 @@ class CustomOntologyController extends AbstractActionController
                             'vocabulary' => $vocabulary->getId(),
                             'localName' => $element['o:local_name'],
                         ])->getContent();
-                    } catch (\Exception $e) {
+                    } catch (\Throwable $e) {
                         $existingTerm = null;
                     }
                     if ($existingTerm) {
