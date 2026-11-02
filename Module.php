@@ -62,6 +62,8 @@ class Module extends AbstractModule
 
     /**
      * Add the button Create vocabulary.
+     *
+     * @todo Add an event in main view to avoid this hack.
      */
     public function handleViewLayout(Event $event): void
     {
@@ -74,9 +76,19 @@ class Module extends AbstractModule
             return;
         }
 
-        $vars = $view->vars();
+        $plugins = $view->getHelperPluginManager();
 
-        $html = $view->hyperlink($view->translate('Create a vocabulary'), $view->url('admin/custom-ontology'), ['class' => 'button']);
+        $userIsAllowed = $plugins->get('userIsAllowed');
+        if (!$userIsAllowed(\Omeka\Api\Adapter\VocabularyAdapter::class, 'create')) {
+            return;
+        }
+
+        $vars = $view->vars();
+        $url = $plugins->get('url');
+        $translate = $plugins->get('translate');
+        $hyperlink = $plugins->get('hyperlink');
+
+        $html = $hyperlink($translate('Create a vocabulary'), $url('admin/custom-ontology'), ['class' => 'button']);
         $content = $vars->offsetGet('content');
         $content = strtr($content, ['<div id="page-actions">' => '<div id="page-actions">' . PHP_EOL . $html]);
         $vars->offsetSet('content', $content);

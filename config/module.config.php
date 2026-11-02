@@ -64,12 +64,9 @@ return [
             'admin' => [
                 'child_routes' => [
                     'custom-ontology' => [
-                        'type' => 'Segment',
+                        'type' => \Laminas\Router\Http\Literal::class,
                         'options' => [
-                            'route' => '/custom-ontology[/:action]',
-                            'constraints' => [
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ],
+                            'route' => '/custom-ontology',
                             'defaults' => [
                                 '__NAMESPACE__' => 'CustomOntology\Controller\Admin',
                                 'controller' => Controller\Admin\CustomOntologyController::class,
@@ -84,27 +81,27 @@ return [
     'navigation' => [
         /*// Not possible because keys are numeric in navigation.conf.
         'AdminResource' => [
-            [
+            'vocabularies' => [
                 'pages' => [
                     [
-                        'label' => 'Custom ontology', // @translate
-                        'class' => 'vocabularies',
-                        'route' => 'admin/default',
-                        'controller' => 'custom-ontology',
-                        'action' => 'browse',
-                        'resource' => 'Omeka\Controller\Admin\Vocabulary',
+                        'route' => 'admin/custom-ontology',
+                        'controller' => Controller\Admin\CustomOntologyController::class,
+                        'resource' => Controller\Admin\CustomOntologyController::class,
                         'privilege' => 'create',
+                        'visible' => false,
                     ],
                 ],
             ],
         ],
         */
         'AdminModule' => [
-            [
+            'custom_ontology' => [
                 'label' => 'Custom ontology', // @translate
                 'route' => 'admin/custom-ontology',
                 'class' => 'vocabularies',
-                'resource' => Controller\Admin\CustomOntologyController::class,
+                // Only users with right to import a vocabulary can create one.
+                'resource' => \Omeka\Api\Adapter\VocabularyAdapter::class,
+                'privilege' => 'create',
             ],
         ],
     ],
