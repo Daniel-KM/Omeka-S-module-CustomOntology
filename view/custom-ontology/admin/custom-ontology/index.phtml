@@ -24,7 +24,7 @@ $propertiesFieldset = $form->get('properties_fieldset');
 <?= $this->pageTitle($translate('Create a custom ontology'), 1, $translate('Vocabularies')); ?>
 
 <fieldset id="page-actions">
-    <button type="submit" name="submit" value="submit" form="form-custom-ontology"><?= $translate('Submit') ?></button>
+    <button type="submit" class="button" name="submit" value="submit" form="custom-ontology-form"><?= $translate('Submit') ?></button>
 </fieldset>
 
 <p class="explanation">
@@ -94,5 +94,5 @@ $propertiesFieldset = $form->get('properties_fieldset');
 <?= $this->form()->closeTag($form) ?>
 
 <fieldset id="page-actions-bottom">
-    <button type="submit" name="submit" value="download" form="form-custom-ontology"><?= $translate('Get turtle (no save)') ?></button>
+    <button type="submit" class="button" name="submit" value="download" form="custom-ontology-form"><?= $translate('Get turtle (no save)') ?></button>
 </fieldset>

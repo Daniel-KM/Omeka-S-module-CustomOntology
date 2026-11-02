@@ -14,7 +14,7 @@ class CustomOntologyForm extends Form
         $defaultNs = $this->getOption('default_ns') ?: '';
 
         $this
-            ->setAttribute('id', 'form-custom-ontology')
+            ->setAttribute('id', 'custom-ontology-form')
             ->add([
                 'name' => 'ontology_fieldset',
                 'type' => Fieldset::class,
