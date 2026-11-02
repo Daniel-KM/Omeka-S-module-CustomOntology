@@ -14,6 +14,7 @@ return [
     'form_elements' => [
         'invokables' => [
             Form\CustomOntologyForm::class => Form\CustomOntologyForm::class,
+            Form\DeleteTermsForm::class => Form\DeleteTermsForm::class,
         ],
     ],
     'controllers' => [
@@ -64,9 +65,13 @@ return [
             'admin' => [
                 'child_routes' => [
                     'custom-ontology' => [
-                        'type' => \Laminas\Router\Http\Literal::class,
+                        'type' => \Laminas\Router\Http\Segment::class,
                         'options' => [
-                            'route' => '/custom-ontology',
+                            'route' => '/custom-ontology[/:action[/:id]]',
+                            'constraints' => [
+                                'action' => 'vocabulary',
+                                'id' => '\d+',
+                            ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'CustomOntology\Controller\Admin',
                                 'controller' => Controller\Admin\CustomOntologyController::class,

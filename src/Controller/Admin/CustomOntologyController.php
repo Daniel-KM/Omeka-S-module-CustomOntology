@@ -3,12 +3,15 @@
 namespace CustomOntology\Controller\Admin;
 
 use CustomOntology\Form\CustomOntologyForm;
+use CustomOntology\Form\DeleteTermsForm;
 use Doctrine\ORM\EntityManager;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Omeka\Entity\Property;
 use Omeka\Entity\ResourceClass;
 use Omeka\Entity\Vocabulary;
+use Omeka\Mvc\Exception\NotFoundException;
+use Omeka\Mvc\Exception\PermissionDeniedException;
 use Omeka\Stdlib\Message;
 
 class CustomOntologyController extends AbstractActionController
@@ -181,6 +184,158 @@ class CustomOntologyController extends AbstractActionController
 
         $form->init();
         return $view;
+    }
+
+    /**
+     * List the terms of a vocabulary of the module and delete the unused ones.
+     *
+     * Only the vocabularies managed by the module can be processed, and a term
+     * is deleted only when it is not used anywhere (resources, templates,
+     * settings and search configs).
+     */
+    public function vocabularyAction()
+    {
+        try {
+            /** @var \Omeka\Entity\Vocabulary $vocabulary */
+            $vocabulary = $this->api()->read(
+                'vocabularies',
+                (int) $this->params('id'),
+                [],
+                ['responseContent' => 'resource']
+            )->getContent();
+        } catch (\Omeka\Api\Exception\NotFoundException $e) {
+            throw new NotFoundException;
+        }
+
+        if (!$this->isManagedVocabulary($vocabulary->getPrefix(), $vocabulary->getNamespaceUri())) {
+            throw new NotFoundException;
+        }
+
+        if (!$this->isAllowedToDeleteTerms($vocabulary)) {
+            throw new PermissionDeniedException(sprintf(
+                'Permission denied for the current user to delete the terms of the vocabulary "%s".', // @translate
+                $vocabulary->getPrefix()
+            ));
+        }
+
+        $terms = $this->vocabularyTerms($vocabulary);
+        $usages = [
+            'resource_classes' => $this->termUsages('resource_classes', $terms['resource_classes']),
+            'properties' => $this->termUsages('properties', $terms['properties']),
+        ];
+
+        /** @var \CustomOntology\Form\DeleteTermsForm $form */
+        $form = $this->getForm(DeleteTermsForm::class);
+        foreach ($terms as $type => $list) {
+            $unused = [];
+            foreach ($list as $id => $term) {
+                if (!$this->plugin('termUsages')->isUsed($usages[$type][$id])) {
+                    $unused[$id] = $term;
+                }
+            }
+            $form->get($type)->setValueOptions($unused);
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->getRequest()->getPost());
+            if (!$form->isValid()) {
+                $this->messenger()->addFormErrors($form);
+            } else {
+                $data = $form->getData();
+                $deleted = $this->deleteUnusedTerms($vocabulary, [
+                    'resource_classes' => array_map('intval', $data['resource_classes'] ?? []),
+                    'properties' => array_map('intval', $data['properties'] ?? []),
+                ]);
+                if ($deleted === null) {
+                    $this->messenger()->addWarning('No term selected.'); // @translate
+                } else {
+                    return $this->redirect()->toRoute(null, [], true);
+                }
+            }
+        }
+
+        return new ViewModel([
+            'vocabulary' => $this->api()->read('vocabularies', $vocabulary->getId())->getContent(),
+            'terms' => $terms,
+            'usages' => $usages,
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * The terms are deleted via the api, but the vocabulary is checked too,
+     * because the core restricts the update of the vocabulary to its owner for
+     * a site admin, but not the deletion of its terms.
+     */
+    protected function isAllowedToDeleteTerms(Vocabulary $vocabulary): bool
+    {
+        return $this->userIsAllowed($vocabulary, 'update')
+            && $this->userIsAllowed(\Omeka\Api\Adapter\ResourceClassAdapter::class, 'delete')
+            && $this->userIsAllowed(\Omeka\Api\Adapter\PropertyAdapter::class, 'delete');
+    }
+
+    /**
+     * @return array Terms ("prefix:localName") by id, by type.
+     */
+    protected function vocabularyTerms(Vocabulary $vocabulary): array
+    {
+        $prefix = $vocabulary->getPrefix();
+        $terms = ['resource_classes' => [], 'properties' => []];
+        foreach ($vocabulary->getResourceClasses() as $resourceClass) {
+            $terms['resource_classes'][$resourceClass->getId()] = $prefix . ':' . $resourceClass->getLocalName();
+        }
+        foreach ($vocabulary->getProperties() as $property) {
+            $terms['properties'][$property->getId()] = $prefix . ':' . $property->getLocalName();
+        }
+        foreach ($terms as &$list) {
+            asort($list);
+        }
+        unset($list);
+        return $terms;
+    }
+
+    /**
+     * Delete the selected terms that belong to the vocabulary and that are
+     * still unused: they may have been used since the display of the form.
+     *
+     * @param array $selected Ids by type.
+     * @return array|null Deleted terms, or null when nothing was selected.
+     */
+    protected function deleteUnusedTerms(Vocabulary $vocabulary, array $selected): ?array
+    {
+        if (!array_filter($selected)) {
+            return null;
+        }
+
+        $terms = $this->vocabularyTerms($vocabulary);
+        $deleted = [];
+        $skipped = [];
+        foreach ($selected as $type => $ids) {
+            $list = array_intersect_key($terms[$type], array_flip($ids));
+            $usages = $this->termUsages($type, $list);
+            foreach ($list as $id => $term) {
+                if ($this->plugin('termUsages')->isUsed($usages[$id])) {
+                    $skipped[] = $term;
+                    continue;
+                }
+                $this->api()->delete($type, $id);
+                $deleted[] = $term;
+            }
+        }
+
+        if ($deleted) {
+            $this->messenger()->addSuccess(new Message(
+                '%1$d terms were deleted: %2$s.', // @translate
+                count($deleted), implode(', ', $deleted)
+            ));
+        }
+        if ($skipped) {
+            $this->messenger()->addWarning(new Message(
+                'These terms are used now and were not deleted: %s.', // @translate
+                implode(', ', $skipped)
+            ));
+        }
+        return $deleted;
     }
 
     /**

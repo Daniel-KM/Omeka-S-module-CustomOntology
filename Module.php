@@ -58,6 +58,11 @@ class Module extends AbstractModule
             'view.layout',
             [$this, 'handleViewLayout']
         );
+        $sharedEventManager->attach(
+            'Omeka\Controller\Admin\Vocabulary',
+            'view.browse.actions',
+            [$this, 'handleViewBrowseActions']
+        );
     }
 
     /**
@@ -92,5 +97,44 @@ class Module extends AbstractModule
         $content = $vars->offsetGet('content');
         $content = strtr($content, ['<div id="page-actions">' => '<div id="page-actions">' . PHP_EOL . $html]);
         $vars->offsetSet('content', $content);
+    }
+
+    /**
+     * Add a link to delete the unused terms of the vocabularies of the module.
+     */
+    public function handleViewBrowseActions(Event $event): void
+    {
+        /**
+         * @var \Laminas\View\Renderer\PhpRenderer $view
+         * @var \Omeka\Api\Representation\VocabularyRepresentation $vocabulary
+         */
+        $view = $event->getTarget();
+        $vocabulary = $event->getParam('resource');
+        // The event is triggered on the pages of terms too.
+        if (!$vocabulary instanceof \Omeka\Api\Representation\VocabularyRepresentation) {
+            return;
+        }
+
+        $services = $this->getServiceLocator();
+        $isManagedVocabulary = $services->get('ControllerPluginManager')->get('isManagedVocabulary');
+        if (!$isManagedVocabulary($vocabulary->prefix(), $vocabulary->namespaceUri())) {
+            return;
+        }
+
+        $plugins = $view->getHelperPluginManager();
+        $userIsAllowed = $plugins->get('userIsAllowed');
+        if (!$vocabulary->userIsAllowed('update')
+            || !$userIsAllowed(\Omeka\Api\Adapter\ResourceClassAdapter::class, 'delete')
+            || !$userIsAllowed(\Omeka\Api\Adapter\PropertyAdapter::class, 'delete')
+        ) {
+            return;
+        }
+
+        $url = $plugins->get('url');
+        $translate = $plugins->get('translate');
+        echo '<li>' . $plugins->get('hyperlink')('', $url('admin/custom-ontology', ['action' => 'vocabulary', 'id' => $vocabulary->id()]), [
+            'class' => 'fas fa-eraser',
+            'title' => $translate('Delete unused terms'),
+        ]) . '</li>';
     }
 }

@@ -1,0 +1,82 @@
+<?php
+/**
+ * @var \Laminas\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\VocabularyRepresentation $vocabulary
+ * @var array $terms
+ * @var array $usages
+ * @var \CustomOntology\Form\DeleteTermsForm $form
+ */
+
+$plugins = $this->getHelperPluginManager();
+$url = $plugins->get('url');
+$escape = $plugins->get('escapeHtml');
+$translate = $plugins->get('translate');
+$formElement = $plugins->get('formElement');
+
+$this->htmlElement('body')->appendAttribute('class', 'vocabularies vocabulary-delete-terms');
+
+$form->prepare();
+
+$titles = [
+    'resource_classes' => $translate('Classes'),
+    'properties' => $translate('Properties'),
+];
+$countLabels = [
+    'resource_classes' => $translate('Resources'),
+    'properties' => $translate('Values'),
+];
+?>
+
+<?= $this->pageTitle($escape($vocabulary->label()), 1, $translate('Vocabularies'), $translate('Delete unused terms')) ?>
+
+<div id="page-actions">
+    <?= $this->hyperlink($translate('Cancel'), $url('admin/default', ['controller' => 'vocabulary']), ['class' => 'button']) ?>
+    <button type="submit" class="button red" form="delete-terms-form"><?= $translate('Delete selected terms') ?></button>
+</div>
+
+<p class="explanation">
+    <?= $translate('Only the terms that are not used in resources, resource templates, settings, sites (navigation, item pool and page blocks) and search configs can be deleted, whether they are set by term or by id.') ?>
+</p>
+
+<?= $this->form()->openTag($form) ?>
+<?= $formElement($form->get('csrf')) ?>
+
+<?php foreach ($terms as $type => $list): ?>
+<h2><?= $titles[$type] ?></h2>
+<?php if (!$list): ?>
+<p><?= $translate('No terms.') ?></p>
+<?php continue; endif; ?>
+<?php $options = $form->get($type)->getValueOptions(); ?>
+<table class="tablesaw" data-tablesaw-mode="stack">
+    <thead>
+        <tr>
+            <th></th>
+            <th><?= $translate('Term') ?></th>
+            <th><?= $countLabels[$type] ?></th>
+            <th><?= $translate('Resource templates') ?></th>
+            <th><?= $translate('Settings') ?></th>
+            <th><?= $translate('Sites') ?></th>
+            <th><?= $translate('Search') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($list as $id => $term): $usage = $usages[$type][$id]; ?>
+        <tr>
+            <td>
+                <?php if (isset($options[$id])): ?>
+                <input type="checkbox" name="<?= $type ?>[]" value="<?= $id ?>" aria-label="<?= $escape($term) ?>">
+                <?php endif; ?>
+            </td>
+            <td><?= $escape($term) ?></td>
+            <td><?= $usage['resources'] ?></td>
+            <td><?= $usage['templates'] ?></td>
+            <td><?= $escape(implode(', ', $usage['settings'])) ?></td>
+            <td><?= $escape(implode(', ', $usage['sites'])) ?></td>
+            <td><?= $escape(implode(', ', $usage['search'])) ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php endforeach; ?>
+
+<?= $this->form()->closeTag() ?>
