@@ -362,7 +362,14 @@ class CustomOntologyController extends AbstractActionController
         }
 
         $ontology['o:prefix'] = (string) $ontology['o:prefix'];
+        $ontology['o:namespace_uri'] = (string) $ontology['o:namespace_uri'];
         $ontology['o:label'] = (string) $ontology['o:label'];
+        // Without a final separator, the local names would be appended to the
+        // last segment of the namespace.
+        if (!in_array(substr($ontology['o:namespace_uri'], -1), ['/', '#'], true)) {
+            $this->messenger()->addError('The namespace uri must end with "/" or "#".'); // @translate
+            return;
+        }
         if (strtolower($ontology['o:prefix']) !== $ontology['o:prefix']) {
             $this->messenger()->addError('The prefix of the ontology must be lowercase.'); // @translate
             return;
