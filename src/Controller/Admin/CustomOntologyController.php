@@ -231,7 +231,11 @@ class CustomOntologyController extends AbstractActionController
         }
 
         $api = $this->api();
-        $vocabulary = $api->searchOne('vocabularies', ['prefix' => $ontology['o:prefix']])->getContent();
+        try {
+            $vocabulary = $api->read('vocabularies', ['prefix' => $ontology['o:prefix']])->getContent();
+        } catch (\Exception $e) {
+            $vocabulary = null;
+        }
         if (!empty($vocabulary)) {
             $this->messenger()->addWarning(new Message(
                 'An ontology exists for the prefix "%s".', // @translate
@@ -240,7 +244,11 @@ class CustomOntologyController extends AbstractActionController
             return;
         }
 
-        $vocabulary = $api->searchOne('vocabularies', ['namespace_uri' => $ontology['o:namespace_uri']])->getContent();
+        try {
+            $vocabulary = $api->read('vocabularies', ['namespaceUri' => $ontology['o:namespace_uri']])->getContent();
+        } catch (\Exception $e) {
+            $vocabulary = null;
+        }
         if (!empty($vocabulary)) {
             $this->messenger()->addWarning(new Message(
                 'An ontology exists for the namespace uri "%s".', // @translate
@@ -297,6 +305,9 @@ class CustomOntologyController extends AbstractActionController
             return;
         }
 
+        /**
+         * @var \Omeka\Mvc\Controller\Plugin\Api $api
+         */
         $result = [];
         $api = $this->api();
         $hasError = false;
@@ -397,10 +408,11 @@ class CustomOntologyController extends AbstractActionController
 
             $prefix = $matches[1];
             $element['o:local_name'] = $matches[2];
-            $vocabulary = $api->searchOne('vocabularies',
-                ['prefix' => $prefix],
-                ['responseContent' => 'resource']
-            )->getContent();
+            try {
+                $vocabulary = $api->read('vocabularies', ['prefix' => $prefix], [], ['responseContent' => 'resource'])->getContent();
+            } catch (\Exception $e) {
+                $vocabulary = null;
+            }
             if (empty($vocabulary) && $prefix !== $this->ontologyPrefix) {
                 $hasError = true;
                 $this->messenger()->addError(new Message(
@@ -421,10 +433,14 @@ class CustomOntologyController extends AbstractActionController
                 }
 
                 if (!$keepExisting) {
-                    $existingTerm = $api->searchOne($type, [
-                        'vocabulary_id' => $vocabulary->getId(),
-                        'local_name' => $element['o:local_name'],
-                    ])->getContent();
+                    try {
+                        $existingTerm = $api->read($type, [
+                            'vocabulary' => $vocabulary->getId(),
+                            'localName' => $element['o:local_name'],
+                        ])->getContent();
+                    } catch (\Exception $e) {
+                        $existingTerm = null;
+                    }
                     if ($existingTerm) {
                         $this->messenger()->addWarning(new Message(
                             '%s: The term "%s" exists and is skipped.', // @translate
